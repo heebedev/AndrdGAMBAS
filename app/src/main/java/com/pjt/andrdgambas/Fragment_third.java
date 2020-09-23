@@ -16,5 +16,4 @@ public class Fragment_third extends Fragment {
         Log.v("tab3","tab3");
         return view;
     }
-    
 }
