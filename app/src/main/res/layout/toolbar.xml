@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar
+    android:id="@+id/toolbar_main"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="@color/colorPrimary"
+    android:elevation="4dp"
+    android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+    android:orientation="horizontal"
+    >
+    <ImageView
+        android:id="@+id/img_toolbar_menu"
+        android:layout_margin="17.5dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:background="@android:drawable/menu_full_frame"/>
+
+</androidx.appcompat.widget.Toolbar>
