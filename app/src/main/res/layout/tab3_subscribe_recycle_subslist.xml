@@ -2,14 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:id="@+id/Ll_subsPrd">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp">
 
         <ImageView
             android:id="@+id/iv_image"
+            android:layout_marginRight="15dp"
+            android:padding="5dp"
             android:layout_width="150dp"
             android:layout_height="150dp" />
 
@@ -21,12 +26,16 @@
                 android:id="@+id/tv_prdTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.5"/>
+                android:layout_weight="1.5"
+                android:gravity="left|center"
+                android:text="tv_prdTitle"/>
             <TextView
                 android:id="@+id/tv_chNickname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:gravity="left|center"
+                android:text="tv_chNickname"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -37,13 +46,17 @@
                     android:id="@+id/tv_term"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1.5"/>
+                    android:layout_weight="4"
+                    android:gravity="left|center"
+                    android:text="tv_term"/>
 
                 <TextView
                     android:id="@+id/tv_releaseDay"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:gravity="left|center"
+                    android:text="tv_releaseDay"/>
             </LinearLayout>
 
 
@@ -51,7 +64,9 @@
                 android:id="@+id/tv_cgName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:gravity="left|center"
+                android:text="tv_cgName"/>
 
         </LinearLayout>
     </LinearLayout>

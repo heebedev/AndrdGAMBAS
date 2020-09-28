@@ -30,4 +30,12 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+//    리사이클러뷰 추가 : 송희 
+    //noinspection GradleCompatible
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
+// glide 추가 : 송희
+    implementation 'com.github.bumptech.glide:glide:4.10.0'
+
+
 }
