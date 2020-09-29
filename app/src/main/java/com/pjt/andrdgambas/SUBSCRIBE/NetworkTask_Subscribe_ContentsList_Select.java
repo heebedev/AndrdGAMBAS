@@ -52,7 +52,6 @@ public class NetworkTask_Subscribe_ContentsList_Select extends AsyncTask<Integer
     }
     /////////////// End ProgressDialog /////////////////
 
-
     @Override
     protected Object doInBackground(Integer... integers) {
         StringBuffer stringBuffer = new StringBuffer();
