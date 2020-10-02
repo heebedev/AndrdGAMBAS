@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "421885782827",
+    "firebase_url": "https://gambas-b06ab.firebaseio.com",
+    "project_id": "gambas-b06ab",
+    "storage_bucket": "gambas-b06ab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:421885782827:android:fd3dc5c8d01bfe11c2f36e",
+        "android_client_info": {
+          "package_name": "com.pjt.andrdgambas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "421885782827-4k4fnjlfpd5bfuu2qn8u97gvbrttbguv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2ztWG_D50vpth6bMACmLEQXr2ISHkVjY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "421885782827-4k4fnjlfpd5bfuu2qn8u97gvbrttbguv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
