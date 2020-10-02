@@ -1,6 +1,5 @@
 package com.pjt.andrdgambas.SUBSCRIBE;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -35,6 +35,10 @@ public class Activity_Subscribe_Contents_Detail extends AppCompatActivity {
     // 콘텐츠 디테일
     ArrayList<Bean_Subscribe> contentsDetails; // 콘텐츠 내용
     String urlAddrDetailsContents;
+
+    // 좋아요
+    String urlAddrInsertLike;
+    String urlAddrUpdateLike;
 
     // 댓글
     ArrayList<Bean_Subscribe> commentlist; // 댓글리스트
@@ -123,13 +127,96 @@ public class Activity_Subscribe_Contents_Detail extends AppCompatActivity {
 
             webView.loadUrl("http://" + STATICDATA.CENTIP + ":8080/ftp/"+contentsDetails.get(0).getCtfile()); // 웹
 
+            // 내가 좋아요했는지 확인하고 이미지 숨기기 0 = unlike 보이기, 1 = liked 보이기
+            if( contentsDetails.get(0).getCheckmylikecontents().equals("0")) {
+                unlike_iv.setVisibility(View.VISIBLE); // 빈하트
+                like_iv.setVisibility(View.INVISIBLE);
+            } else {
+                unlike_iv.setVisibility(View.INVISIBLE); // 있을때 빨간하트
+                like_iv.setVisibility(View.VISIBLE);
+            }
+
+            unlike_iv.setOnClickListener( onClickListener );
+            like_iv.setOnClickListener( onClickListener );
 
         }catch (Exception e){
             e.printStackTrace();
         }
     }
 
-    // 콘텐츠 디테일 불러오기
+    View.OnClickListener onClickListener = new View.OnClickListener() {
+
+        @Override
+        public void onClick(View view) {
+
+            // 좋아요 이미지 변경
+            if(unlike_iv.getVisibility() == view.VISIBLE){
+                unlike_iv.setVisibility(view.INVISIBLE);
+                like_iv.setVisibility(view.VISIBLE);
+
+            } else {
+                unlike_iv.setVisibility(view.VISIBLE);
+                like_iv.setVisibility(view.INVISIBLE);
+
+            }
+
+            switch (view.getId()){
+                case R.id.iv_contents_unlike:
+                    // 좋아요 Insert
+                    String uSeqno = STATICDATA.USEQNO;
+                    String ctSeqno = contentsDetails.get(0).getCtSeqno();
+                    String prdSeqno = contentsDetails.get(0).getPrdSeqno();
+
+                    urlAddrInsertLike="";
+                    urlAddrInsertLike = "http://" + STATICDATA.CENTIP + ":8080/gambas/contentsLikeInsert.jsp?"; //get방식으로 넘겨줌
+                    urlAddrInsertLike = urlAddrInsertLike + "&uSeqno=" + uSeqno + "&ctSeqno=" + ctSeqno + "&prdSeqno=" + prdSeqno;
+                    try {
+                        // 좋아요 갯수 변경 + 1
+                        countlikecontents_tv.setText(Integer.toString(Integer.parseInt(countlikecontents_tv.getText().toString()) + 1));
+
+                        NetworkTask_Subscribe_Insert_Update networkTask_subscribe_insertUpdate
+                                = new NetworkTask_Subscribe_Insert_Update(Activity_Subscribe_Contents_Detail.this, urlAddrInsertLike);
+                        networkTask_subscribe_insertUpdate.execute().get();
+
+                        //Toast.makeText(Activity_Subscribe_Contents_Detail.this, urlAddrInsertLike + "입력되었습니다.", Toast.LENGTH_SHORT).show();
+
+                    }catch (Exception e) {
+                        e.printStackTrace();
+                        Log.v("좋아요  :", "등록 오류");
+                    }
+                    break;
+
+                case R.id.iv_contents_like:
+                    // 좋아요 Update
+                    uSeqno = STATICDATA.USEQNO;
+                    ctSeqno = contentsDetails.get(0).getCtSeqno();
+
+                    urlAddrUpdateLike="";
+                    urlAddrUpdateLike = "http://" + STATICDATA.CENTIP + ":8080/gambas/contentsLikeUpdate.jsp?"; //get방식으로 넘겨줌
+                    urlAddrUpdateLike = urlAddrUpdateLike + "&uSeqno=" + uSeqno + "&ctSeqno=" + ctSeqno;
+                    try {
+                        // 좋아요 갯수 변경 - 1
+                        countlikecontents_tv.setText(Integer.toString(Integer.parseInt(countlikecontents_tv.getText().toString()) - 1));
+
+                        NetworkTask_Subscribe_Insert_Update networkTask_subscribe_insertUpdate
+                                = new NetworkTask_Subscribe_Insert_Update(Activity_Subscribe_Contents_Detail.this, urlAddrUpdateLike);
+                        networkTask_subscribe_insertUpdate.execute().get();
+
+                        //Toast.makeText(Activity_Subscribe_Contents_Detail.this, urlAddrUpdateLike + "수정완료.", Toast.LENGTH_SHORT).show();
+
+                    }catch (Exception e) {
+                        e.printStackTrace();
+                        Log.v("좋아요 :", "수정 오류");
+                    }
+                    break;
+
+
+            }
+
+        }
+    };
+
+    // 댓글 리스트 불러오기
     private void ConnectGetCommentList() {
         urlAddrContentsCommentList = "http://" + STATICDATA.CENTIP + ":8080/gambas/commentListQuery.jsp?";
         urlAddrContentsCommentList = urlAddrContentsCommentList + "ctSeqno=" + STATICDATA.CT_SEQNO; //  ctSeqno
@@ -163,7 +250,7 @@ public class Activity_Subscribe_Contents_Detail extends AppCompatActivity {
     protected void onStart() {
 
         ConnectGetContentsDetails(); // 내용 불러오기
-        ConnectGetCommentList(); // 댓글 리스트 
+        ConnectGetCommentList(); // 댓글 리스트
 
         super.onStart();
     }
