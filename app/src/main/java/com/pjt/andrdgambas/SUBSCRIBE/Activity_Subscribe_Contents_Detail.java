@@ -43,8 +43,11 @@ public class Activity_Subscribe_Contents_Detail extends AppCompatActivity {
     // 댓글
     ArrayList<Bean_Subscribe> commentlist; // 댓글리스트
     String urlAddrContentsCommentList;
+    String urlAddrUpdateCommentValidation; // 댓글 삭제
+    String urlAddrInsertComment; // 댓글 입력
     RecyclerView rv_comments;
     Adapter_Subscribe_Contents_CommentList adapter_commentlist;
+
 
 
     @Override
@@ -69,6 +72,11 @@ public class Activity_Subscribe_Contents_Detail extends AppCompatActivity {
                 onBackPressed(); //
             }
         });
+
+
+
+
+
 
 
         // 웹뷰
@@ -103,9 +111,15 @@ public class Activity_Subscribe_Contents_Detail extends AppCompatActivity {
 ////        webView.loadUrl("https://docs.google.com/viewerng/viewer?embedded=true&url="+url);
 
 
+    }
 
+    @Override
+    protected void onStart() {
 
+        ConnectGetContentsDetails(); // 내용 불러오기
+        ConnectGetCommentList(); // 댓글 리스트
 
+        super.onStart();
     }
 
 
@@ -138,12 +152,15 @@ public class Activity_Subscribe_Contents_Detail extends AppCompatActivity {
 
             unlike_iv.setOnClickListener( onClickListener );
             like_iv.setOnClickListener( onClickListener );
+            insert_comment_btn.setOnClickListener( onClickListener );
 
         }catch (Exception e){
             e.printStackTrace();
         }
     }
 
+
+    // 클릭 리스너
     View.OnClickListener onClickListener = new View.OnClickListener() {
 
         @Override
@@ -210,6 +227,28 @@ public class Activity_Subscribe_Contents_Detail extends AppCompatActivity {
                     }
                     break;
 
+                case R.id.btn_contents_insert_comment:
+                    uSeqno = STATICDATA.USEQNO;
+                    ctSeqno = contentsDetails.get(0).getCtSeqno();
+                    String cmcontext = input_comment_et.getText().toString().trim();
+
+                    urlAddrInsertComment="";
+                    urlAddrInsertComment = "http://" + STATICDATA.CENTIP + ":8080/gambas/contentsCommentInsert.jsp?"; //get방식으로 넘겨줌
+                    urlAddrInsertComment = urlAddrInsertComment + "&uSeqno=" + uSeqno + "&ctSeqno=" + ctSeqno + "&cmcontext=" + cmcontext;
+
+                    try {
+                        NetworkTask_Subscribe_Insert_Update networkTask_subscribe_insertUpdate
+                                = new NetworkTask_Subscribe_Insert_Update(Activity_Subscribe_Contents_Detail.this, urlAddrInsertComment);
+                        networkTask_subscribe_insertUpdate.execute().get();
+                    }catch (Exception e){
+                        e.printStackTrace();
+                        Log.v("댓글입력  :", "입력 오류");
+                    }
+
+                    //리스트 다시불러오기
+                    ConnectGetCommentList();
+                    break;
+
 
             }
 
@@ -234,10 +273,50 @@ public class Activity_Subscribe_Contents_Detail extends AppCompatActivity {
 
         } catch (Exception e) {
             e.printStackTrace();
+
         }
         super.onStart();
     }
 
+    //댓글입력
+    public void InsertComment(){
+        String uSeqno = STATICDATA.USEQNO;
+        String ctSeqno = contentsDetails.get(0).getCtSeqno();
+        String cmcontext = input_comment_et.getText().toString().trim();
+
+        urlAddrInsertComment="";
+        urlAddrInsertComment = "http://" + STATICDATA.CENTIP + ":8080/gambas/contentsCommentInsert.jsp?"; //get방식으로 넘겨줌
+        urlAddrInsertComment = urlAddrInsertComment + "&uSeqno=" + uSeqno + "&ctSeqno=" + ctSeqno + "&cmcontext=" + cmcontext;
+
+        try {
+            NetworkTask_Subscribe_Insert_Update networkTask_subscribe_insertUpdate
+                    = new NetworkTask_Subscribe_Insert_Update(Activity_Subscribe_Contents_Detail.this, urlAddrInsertComment);
+            networkTask_subscribe_insertUpdate.execute().get();
+        }catch (Exception e){
+            e.printStackTrace();
+            Log.v("댓글입력  :", "입력 오류");
+        }
+    }
+
+
+    //댓글삭제
+    public void UpdateComment(){
+        //클릭한 seq_cmt가져옴
+        String cmSeqno = STATICDATA.CM_SEQNO;
+
+        urlAddrUpdateCommentValidation="";
+        urlAddrUpdateCommentValidation = "http://" + STATICDATA.CENTIP + ":8080/gambas/contentsCommentUpdate.jsp?"; //get방식으로 넘겨줌
+        urlAddrUpdateCommentValidation = urlAddrUpdateCommentValidation + "&cmSeqno=" + cmSeqno;
+
+        try {
+            NetworkTask_Subscribe_Insert_Update networkTask_subscribe_insertUpdate
+                    = new NetworkTask_Subscribe_Insert_Update(Activity_Subscribe_Contents_Detail.this, urlAddrUpdateCommentValidation);
+            networkTask_subscribe_insertUpdate.execute().get();
+        }catch (Exception e){
+            e.printStackTrace();
+            Log.v("댓글삭제  :", "수정 오류");
+        }
+    }
 
 
     @Override // 뒤로가기
@@ -246,14 +325,7 @@ public class Activity_Subscribe_Contents_Detail extends AppCompatActivity {
         super.onBackPressed();
     }
 
-    @Override
-    protected void onStart() {
 
-        ConnectGetContentsDetails(); // 내용 불러오기
-        ConnectGetCommentList(); // 댓글 리스트
-
-        super.onStart();
-    }
 
 
 

@@ -23,11 +23,11 @@ public class NetworkTask_Subscribe_Insert_Update extends AsyncTask<Integer, Stri
 
     @Override
     protected void onPreExecute() { //실행전
-        progressDialog = new ProgressDialog(context);
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progressDialog.setTitle("Dialog");
-        progressDialog.setMessage("Insert.......");
-        progressDialog.show();
+//        progressDialog = new ProgressDialog(context);
+//        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//        progressDialog.setTitle("Dialog");
+//        progressDialog.setMessage("Insert.......");
+//        progressDialog.show();
     }
 
     @Override
@@ -38,7 +38,7 @@ public class NetworkTask_Subscribe_Insert_Update extends AsyncTask<Integer, Stri
     @Override
     protected void onPostExecute(Void aVoid) { //끝났을떄
         super.onPostExecute(aVoid);
-        progressDialog.dismiss();
+//        progressDialog.dismiss();
     }
 
     @Override

@@ -6,5 +6,7 @@ public class STATICDATA {
     public static String USEQNO = "1"; // uSeqno
     public static String PRD_SEQNO; // prdSeqno
     public static String CT_SEQNO; // ctSeqno
+    public static String CM_SEQNO; // ctSeqno
+
 
 }

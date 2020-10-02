@@ -21,6 +21,8 @@ public class Adapter_Subscribe_Contents_CommentList extends RecyclerView.Adapter
     //Field
     private ArrayList<Bean_Subscribe> commentlist;
 
+    String urlAddrUpdateCommentValidation; // 댓글수정
+
     //Constructor
     public Adapter_Subscribe_Contents_CommentList(ArrayList<Bean_Subscribe> arrayList, Activity_Subscribe_Contents_Detail activity_subscribe_contents_detail) {
         this.commentlist = arrayList;
@@ -43,8 +45,43 @@ public class Adapter_Subscribe_Contents_CommentList extends RecyclerView.Adapter
         holder.tv_cmRegistDate.setText(commentlist.get(position).getCmRegistDate());
         holder.tv_cmcontext.setText(commentlist.get(position).getCmcontext());
 
+        //댓글작성자만 삭제 가능하도록 삭제 표시
+        if(commentlist.get(position).getuSeqno().equals(STATICDATA.USEQNO)){
+            holder.tv_delete_comment.setVisibility(View.VISIBLE);
+        }else{
+            holder.tv_delete_comment.setVisibility(View.GONE);
+        }
+
+        //삭제버튼 클릭 하면 ctSeqno 가져옴
+        holder.tv_delete_comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                getSeqCmt(holder.getAdapterPosition()); // 클릭한 댓글 seq_cmt가져오기
+                Activity_Subscribe_Contents_Detail activity_subscribe_contents_detail = new Activity_Subscribe_Contents_Detail();
+                activity_subscribe_contents_detail.UpdateComment();//DB에서 validation = 1(삭제)로 변경
+
+            }
+
+                //seq_cmt
+                private void getSeqCmt(int position) {
+                    try {
+                        String cmSeqno = commentlist.get(position).getCmSeqno();
+                        STATICDATA.CM_SEQNO = cmSeqno;
+                        Log.v("Current", "코멘트번호는?" + cmSeqno);
+                        commentlist.remove(position); // 어레이리스트에서 삭제
+                        notifyItemRemoved(position); //새로고침
+
+                    } catch (IndexOutOfBoundsException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+
+        });
 
     }
+
+
 
     @Override
     public int getItemCount() {
