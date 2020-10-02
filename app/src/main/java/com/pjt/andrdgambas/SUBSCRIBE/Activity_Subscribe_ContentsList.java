@@ -48,14 +48,14 @@ public class Activity_Subscribe_ContentsList extends AppCompatActivity {
 
     @Override
     protected void onStart() {
-        //공지사항
+
         contentslist = new ArrayList<Bean_Subscribe>();
         urlAddrSelectContentsList = "http://" + STATICDATA.CENTIP + ":8080/gambas/contentsListQuery.jsp?";
         urlAddrSelectContentsList = urlAddrSelectContentsList + "prdSeqno=" + STATICDATA.PRD_SEQNO ; //  uSeqno 넘겨줌
         Log.v(TAG, " 콘텐츠리스트 url" +urlAddrSelectContentsList);
 
         try {
-            contentslist = new ArrayList<Bean_Subscribe>();
+            //contentslist = new ArrayList<Bean_Subscribe>();
             NetworkTask_Subscribe_ContentsList_Select NetworkTask = new NetworkTask_Subscribe_ContentsList_Select(Activity_Subscribe_ContentsList.this, urlAddrSelectContentsList); //
             contentslist = (ArrayList<Bean_Subscribe>) NetworkTask.execute().get();
 

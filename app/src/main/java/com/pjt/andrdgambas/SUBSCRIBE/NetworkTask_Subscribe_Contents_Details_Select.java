@@ -15,22 +15,23 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class NetworkTask_Subscribe_ContentsList_Select extends AsyncTask<Integer, String, Object> {
+public class NetworkTask_Subscribe_Contents_Details_Select extends AsyncTask<Integer, String, Object> {
 
     Context context;
     String mAddr;
 
     //내부적으로필요
     ProgressDialog progressDialog;
-    ArrayList<Bean_Subscribe> contentslist;
+    ArrayList<Bean_Subscribe> contentsDetails;
 
 
     // Constructor 생성
-    public NetworkTask_Subscribe_ContentsList_Select(Context context, String mAddr) {
+    public NetworkTask_Subscribe_Contents_Details_Select(Context context, String mAddr) {
         this.context = context;
         this.mAddr = mAddr;
 
-        this.contentslist = new ArrayList<Bean_Subscribe>();
+        this.contentsDetails = new ArrayList<Bean_Subscribe>(); // 콘텐츠내용
+
     }
 
     /////////////// Start ProgressDialog ///////////////
@@ -85,7 +86,8 @@ public class NetworkTask_Subscribe_ContentsList_Select extends AsyncTask<Integer
                 }
 
                 //끝나면 JSON분해하기 파싱 메소드
-                Parser(stringBuffer.toString());
+                ParserContentsDetails(stringBuffer.toString());
+
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -98,21 +100,20 @@ public class NetworkTask_Subscribe_ContentsList_Select extends AsyncTask<Integer
                 e.printStackTrace();
             }
         }
-        return contentslist;  // 어레이리스트 넘겨주기 !!
+        return contentsDetails;  // 어레이리스트 넘겨주기 !!
     }
 
 
     //////////JSON에 맞게 가져올수있게 쓰기/////////////////
-    protected void Parser(String str) {
-//        Log.v( "Current", "Parser()" );
+    protected void ParserContentsDetails(String str) {
+        Log.v( "Current", "Parser()" );
         try {
-            Log.v( "Parser", str );
+            Log.v( "Contents Details Parser", str );
             //JSONObject jsonObject = new JSONObject(str);
             //JSONArray jsonArray = new JSONArray(jsonObject.getString("scheduledetailscomments_info"));// 안드로이드껄로 쓸때 JSONArray 로 불러오고
             JSONArray jsonArray = new JSONArray(str);// JSONArray 바로 불러와보기 iOS jsp 와 동일하게 사용 가능
-            contentslist.clear();
+            contentsDetails.clear();
 
-            //Log.v("몇개 가져옴?", String.valueOf(jsonArray.length()));
             for (int i = 0 ; i < jsonArray.length() ; i++) {
                 JSONObject sublist_Object = (JSONObject) jsonArray.get(i);
                 String ctSeqno = sublist_Object.getString("ctSeqno");
@@ -123,14 +124,19 @@ public class NetworkTask_Subscribe_ContentsList_Select extends AsyncTask<Integer
                 String ctValidation = sublist_Object.getString("ctValidation");
                 String prdSeqno = sublist_Object.getString("prdSeqno");
                 String ctReleaseDate = sublist_Object.getString( "ctReleaseDate" );
+                String countlikecontents = sublist_Object.getString( "countlikecontents" );
+                String checkmylikecontents = sublist_Object.getString( "checkmylikecontents" );
 
-                contentslist.add(new Bean_Subscribe(ctSeqno, ctTitle, ctContext, ctfile, ctRegistDate, ctValidation, prdSeqno, ctReleaseDate));
+                contentsDetails.add(new Bean_Subscribe(ctSeqno, ctTitle, ctContext, ctfile, ctRegistDate, ctValidation, prdSeqno, ctReleaseDate, countlikecontents, checkmylikecontents));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
+
+
+
 
 
 

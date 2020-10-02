@@ -51,11 +51,11 @@ public class Adapter_Subscribe_ContentsList extends RecyclerView.Adapter<Adapter
             @Override
             public void onClick(View view) {
 
-                STATICDATA.CT_SEQNO = contentsList.get(position).getCtSeqno(); // ctSeqno 보내기 바꿔주기
-                Log.v("ctSeqno", String.valueOf(STATICDATA.CT_SEQNO));
+                STATICDATA.CT_SEQNO = contentsList.get(position).getCtSeqno(); // ctSeqno 보내기 STATIC 바꿔주기
+                Log.v("ctSeqno", contentsList.get(position).getCtSeqno());
 
-                //Intent intent = new Intent(view.getContext(), Fragment_Subscribe_ContentsList.class); // ContentsList로이
-                //view.getContext().startActivity(intent);
+                Intent intent = new Intent(view.getContext(), Activity_Subscribe_Contents_Detail.class); // ContentsList로이
+                view.getContext().startActivity(intent);
 
 
             }

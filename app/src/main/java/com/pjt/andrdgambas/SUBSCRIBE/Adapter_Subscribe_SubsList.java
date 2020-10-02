@@ -44,7 +44,7 @@ public class Adapter_Subscribe_SubsList extends RecyclerView.Adapter<Adapter_Sub
 
         //Glide gradle 추가 : 이미지뷰 url(String)로 가져오기
         Glide.with(holder.itemView.getContext())
-                .load("http://192.168.2.10:8080/ftp/" + subslist.get(position).getPrdImage()) // 이미지 url 바꿔야함
+                .load("http://"+STATICDATA.CENTIP+":8080/ftp/" + subslist.get(position).getPrdImage()) // 이미지 url 바꿔야함
                 .placeholder(R.drawable.ic_launcher_foreground) // 이미지 없을때 대체  // 교체 해야함
                 .error(R.drawable.ic_launcher_foreground) // 이미지 없을때 대체
                 .into(holder.iv_prdImage);
@@ -54,6 +54,7 @@ public class Adapter_Subscribe_SubsList extends RecyclerView.Adapter<Adapter_Sub
         holder.tv_term.setText(subslist.get(position).getTerm());
         holder.tv_releaseDay.setText(subslist.get(position).getReleaseDay());
         holder.tv_cgName.setText(subslist.get(position).getCgName());
+
 
         //클릭
         holder.layout_subsPrd.setOnClickListener(new View.OnClickListener() {

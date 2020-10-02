@@ -69,39 +69,42 @@ public class Bean_Subscribe {
     }
 
     // Constructor : contetns List
-    public Bean_Subscribe(String prdSeqno, String ctSeqno, String ctTitle, String ctContext, String ctfile, String ctRegistDate, String ctValidation, String ctReleaseDate) {
-        this.prdSeqno = prdSeqno;
+    public Bean_Subscribe(String ctSeqno, String ctTitle, String ctContext, String ctfile, String ctRegistDate, String ctValidation, String prdSeqno, String ctReleaseDate) {
+
         this.ctSeqno = ctSeqno;
         this.ctTitle = ctTitle;
         this.ctContext = ctContext;
         this.ctfile = ctfile;
         this.ctRegistDate = ctRegistDate;
         this.ctValidation = ctValidation;
+        this.prdSeqno = prdSeqno;
         this.ctReleaseDate = ctReleaseDate;
     }
 
     // Constructor : contetns View (좋아요 갯수 포함)
-    public Bean_Subscribe(String prdSeqno, String ctSeqno, String ctTitle, String ctContext, String ctfile, String ctRegistDate, String ctValidation, String ctReleaseDate, String countlikecontents, String checkmylikecontents) {
-        this.prdSeqno = prdSeqno;
+    public Bean_Subscribe(String ctSeqno, String ctTitle, String ctContext, String ctfile, String ctRegistDate, String ctValidation, String prdSeqno, String ctReleaseDate, String countlikecontents, String checkmylikecontents) {
+
         this.ctSeqno = ctSeqno;
         this.ctTitle = ctTitle;
         this.ctContext = ctContext;
         this.ctfile = ctfile;
         this.ctRegistDate = ctRegistDate;
         this.ctValidation = ctValidation;
+        this.prdSeqno = prdSeqno;
         this.ctReleaseDate = ctReleaseDate;
         this.countlikecontents = countlikecontents;
         this.checkmylikecontents = checkmylikecontents;
     }
 
     // Constructor : 댓글리스트
-    public Bean_Subscribe(String uSeqno, String ctSeqno, String cmSeqno, String cmcontext, String cmRegistDate, String cmValidation, String uName) {
-        this.uSeqno = uSeqno;
-        this.ctSeqno = ctSeqno;
+    public Bean_Subscribe( String cmSeqno, String cmcontext, String cmRegistDate, String cmValidation, String ctSeqno, String uSeqno, String uName) {
+
         this.cmSeqno = cmSeqno;
         this.cmcontext = cmcontext;
         this.cmRegistDate = cmRegistDate;
         this.cmValidation = cmValidation;
+        this.ctSeqno = ctSeqno;
+        this.uSeqno = uSeqno;
         this.uName = uName;
     }
 
