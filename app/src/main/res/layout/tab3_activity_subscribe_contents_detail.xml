@@ -96,6 +96,7 @@
                     android:id="@+id/tv_contents_ctContext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
                     android:text="안녕하세요 hello 안녕하세요 hello 안녕하세요 hello 안녕하세요 hello 안녕하세요 hello 안녕하세요 hello 안녕하세요 hello 안녕하세요 hello 안녕하세요 hello 안녕하세요 hello 안녕하세요 hello 안녕하세요 hello "/>
 
             </LinearLayout>
@@ -103,31 +104,38 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="#D5D4D4"
+                android:paddingBottom="15dp"
                 android:orientation="vertical">
-
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
                     android:text="댓글"
+                    android:textSize="17dp"
                     android:textStyle="bold" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                <EditText
-                    android:id="@+id/et_contents_input_comment"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="댓글을 작성해 주세요." />
 
-                <Button
-                    android:id="@+id/btn_contents_insert_comment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="등록" />
+                    <EditText
+                        android:id="@+id/et_contents_input_comment"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:hint="댓글을 작성해 주세요." />
+
+                    <Button
+                        android:id="@+id/btn_contents_insert_comment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10dp"
+                        android:text="등록" />
                 </LinearLayout>
+            </LinearLayout>
 
 
                 <androidx.core.widget.NestedScrollView
@@ -146,7 +154,7 @@
 
                 </androidx.core.widget.NestedScrollView>
 
-            </LinearLayout>
+
 
         </LinearLayout>
     </ScrollView>

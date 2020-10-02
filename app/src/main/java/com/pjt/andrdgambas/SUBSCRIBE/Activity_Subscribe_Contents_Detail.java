@@ -75,10 +75,6 @@ public class Activity_Subscribe_Contents_Detail extends AppCompatActivity {
 
 
 
-
-
-
-
         // 웹뷰
         webView.setWebViewClient(new WebViewClient()); // 클릭시 새창 안뜨게
         mWebSettings = webView.getSettings(); //세부 세팅 등록
@@ -166,25 +162,19 @@ public class Activity_Subscribe_Contents_Detail extends AppCompatActivity {
         @Override
         public void onClick(View view) {
 
-            // 좋아요 이미지 변경
-            if(unlike_iv.getVisibility() == view.VISIBLE){
-                unlike_iv.setVisibility(view.INVISIBLE);
-                like_iv.setVisibility(view.VISIBLE);
-
-            } else {
-                unlike_iv.setVisibility(view.VISIBLE);
-                like_iv.setVisibility(view.INVISIBLE);
-
-            }
-
-            switch (view.getId()){
+            switch (view.getId()) {
                 case R.id.iv_contents_unlike:
+
+                    // 좋아요 누를때 이미지 변경
+                    unlike_iv.setVisibility(view.INVISIBLE);
+                    like_iv.setVisibility(view.VISIBLE);
+
                     // 좋아요 Insert
                     String uSeqno = STATICDATA.USEQNO;
                     String ctSeqno = contentsDetails.get(0).getCtSeqno();
                     String prdSeqno = contentsDetails.get(0).getPrdSeqno();
 
-                    urlAddrInsertLike="";
+                    urlAddrInsertLike = "";
                     urlAddrInsertLike = "http://" + STATICDATA.CENTIP + ":8080/gambas/contentsLikeInsert.jsp?"; //get방식으로 넘겨줌
                     urlAddrInsertLike = urlAddrInsertLike + "&uSeqno=" + uSeqno + "&ctSeqno=" + ctSeqno + "&prdSeqno=" + prdSeqno;
                     try {
@@ -197,18 +187,23 @@ public class Activity_Subscribe_Contents_Detail extends AppCompatActivity {
 
                         //Toast.makeText(Activity_Subscribe_Contents_Detail.this, urlAddrInsertLike + "입력되었습니다.", Toast.LENGTH_SHORT).show();
 
-                    }catch (Exception e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                         Log.v("좋아요  :", "등록 오류");
                     }
                     break;
 
                 case R.id.iv_contents_like:
+
+                    // 좋아요 해제할 떄 이미지 변경
+                    unlike_iv.setVisibility(view.VISIBLE);
+                    like_iv.setVisibility(view.INVISIBLE);
+
                     // 좋아요 Update
                     uSeqno = STATICDATA.USEQNO;
                     ctSeqno = contentsDetails.get(0).getCtSeqno();
 
-                    urlAddrUpdateLike="";
+                    urlAddrUpdateLike = "";
                     urlAddrUpdateLike = "http://" + STATICDATA.CENTIP + ":8080/gambas/contentsLikeUpdate.jsp?"; //get방식으로 넘겨줌
                     urlAddrUpdateLike = urlAddrUpdateLike + "&uSeqno=" + uSeqno + "&ctSeqno=" + ctSeqno;
                     try {
@@ -221,7 +216,7 @@ public class Activity_Subscribe_Contents_Detail extends AppCompatActivity {
 
                         //Toast.makeText(Activity_Subscribe_Contents_Detail.this, urlAddrUpdateLike + "수정완료.", Toast.LENGTH_SHORT).show();
 
-                    }catch (Exception e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                         Log.v("좋아요 :", "수정 오류");
                     }
@@ -232,26 +227,32 @@ public class Activity_Subscribe_Contents_Detail extends AppCompatActivity {
                     ctSeqno = contentsDetails.get(0).getCtSeqno();
                     String cmcontext = input_comment_et.getText().toString().trim();
 
-                    urlAddrInsertComment="";
-                    urlAddrInsertComment = "http://" + STATICDATA.CENTIP + ":8080/gambas/contentsCommentInsert.jsp?"; //get방식으로 넘겨줌
-                    urlAddrInsertComment = urlAddrInsertComment + "&uSeqno=" + uSeqno + "&ctSeqno=" + ctSeqno + "&cmcontext=" + cmcontext;
+                    //댓글 null값 등록 방지
+                    if (cmcontext.length() < 5) {
+                        Toast.makeText(Activity_Subscribe_Contents_Detail.this, "5자 이상 작성해주세요.", Toast.LENGTH_SHORT).show();
+                    } else if (cmcontext.length() >= 200) {
+                        Toast.makeText(Activity_Subscribe_Contents_Detail.this, "200자 미만 작성해주세요.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        urlAddrInsertComment = "";
+                        urlAddrInsertComment = "http://" + STATICDATA.CENTIP + ":8080/gambas/contentsCommentInsert.jsp?"; //get방식으로 넘겨줌
+                        urlAddrInsertComment = urlAddrInsertComment + "&uSeqno=" + uSeqno + "&ctSeqno=" + ctSeqno + "&cmcontext=" + cmcontext;
 
-                    try {
-                        NetworkTask_Subscribe_Insert_Update networkTask_subscribe_insertUpdate
-                                = new NetworkTask_Subscribe_Insert_Update(Activity_Subscribe_Contents_Detail.this, urlAddrInsertComment);
-                        networkTask_subscribe_insertUpdate.execute().get();
-                    }catch (Exception e){
-                        e.printStackTrace();
-                        Log.v("댓글입력  :", "입력 오류");
+                        try {
+                            NetworkTask_Subscribe_Insert_Update networkTask_subscribe_insertUpdate
+                                    = new NetworkTask_Subscribe_Insert_Update(Activity_Subscribe_Contents_Detail.this, urlAddrInsertComment);
+                            networkTask_subscribe_insertUpdate.execute().get();
+
+                            input_comment_et.setText(""); // 댓글입력창 리셋
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            Log.v("댓글입력  :", "입력 오류");
+                        }
+
+                        //리스트 다시불러오기
+                        ConnectGetCommentList();
                     }
-
-                    //리스트 다시불러오기
-                    ConnectGetCommentList();
                     break;
-
-
             }
-
         }
     };
 
@@ -278,25 +279,6 @@ public class Activity_Subscribe_Contents_Detail extends AppCompatActivity {
         super.onStart();
     }
 
-    //댓글입력
-    public void InsertComment(){
-        String uSeqno = STATICDATA.USEQNO;
-        String ctSeqno = contentsDetails.get(0).getCtSeqno();
-        String cmcontext = input_comment_et.getText().toString().trim();
-
-        urlAddrInsertComment="";
-        urlAddrInsertComment = "http://" + STATICDATA.CENTIP + ":8080/gambas/contentsCommentInsert.jsp?"; //get방식으로 넘겨줌
-        urlAddrInsertComment = urlAddrInsertComment + "&uSeqno=" + uSeqno + "&ctSeqno=" + ctSeqno + "&cmcontext=" + cmcontext;
-
-        try {
-            NetworkTask_Subscribe_Insert_Update networkTask_subscribe_insertUpdate
-                    = new NetworkTask_Subscribe_Insert_Update(Activity_Subscribe_Contents_Detail.this, urlAddrInsertComment);
-            networkTask_subscribe_insertUpdate.execute().get();
-        }catch (Exception e){
-            e.printStackTrace();
-            Log.v("댓글입력  :", "입력 오류");
-        }
-    }
 
 
     //댓글삭제
