@@ -38,7 +38,6 @@ public class Fragment_home extends Fragment {
     Intent intent;
     HomeAdapter adapter;
     String [] categoryList;
-    String uSeqno = "2";
     RecyclerView [] recyclerViews;
     TextView [] textViews;
 
@@ -125,10 +124,10 @@ public class Fragment_home extends Fragment {
         // 리사이클러뷰에 LinearLayoutManager 객체 지정.
         recyclerView_rec.setLayoutManager(mLayoutManager) ;
 
-        urlAddr = "http://localhost:8080/gambas/getUserCategoryList_android.jsp?seq=" + uSeqno;
+
+        urlAddr = "http://" + centIP + ":8080/test/getUserCategoryList_android.jsp?seq=" + HomeData.USERID;
         connectionCGGetData(urlAddr);
-        urlAddr = "http://localhost:8080/gambas/getRecommendData_android.jsp?category=";
-        Log.v("urlAddr",urlAddr);
+        urlAddr = "http://" + centIP + ":8080/test/getRecommendData_android.jsp?category=";
         connectionCTGetData(urlAddr);
         // init Adapter
         adapter = new HomeAdapter(getActivity(), list) ;
@@ -161,7 +160,6 @@ public class Fragment_home extends Fragment {
             recyclerViews[idx-1].setVisibility(recyclerViews[idx-1].VISIBLE);
             textViews[idx-1].setVisibility(textViews[idx-1].VISIBLE);
             urlAddr = "http://" + centIP + ":8080/test/getCategoryData_android.jsp?category=" + categoryList[i];
-            Log.v("urlAddr", urlAddr);
             connectionCTGetData(urlAddr);
             // init Adapter
             adapter = new HomeAdapter(getActivity(), list) ;
@@ -169,18 +167,6 @@ public class Fragment_home extends Fragment {
             recyclerViews[idx-1].setAdapter(adapter);
         }
 
-
-
-        //어뎁터 안에 만든 리스너를 불러와서 사용한다
-//        adapter.setOnItemClickListener(new HomeAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClickListener(View v, int position) {
-//                Intent intent = new Intent(mContext,SelectFood.class);
-//                intent.putExtra("seq",list.get(position).getSeq());
-//                intent.putExtra("view",list.get(position).getView());
-//                startActivity(intent);
-//            }
-//        });
 
         btn_logout = view.findViewById(R.id.btn_logout);
 

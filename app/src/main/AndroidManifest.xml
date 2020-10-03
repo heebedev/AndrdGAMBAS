@@ -24,16 +24,17 @@
 
         <activity android:name=".EmailLoginActivity" />
         <activity android:name=".LoginActivity">
-        </activity>
-        <activity android:name=".SUBSCRIBE.Activity_Subscribe_ContentsList"></activity>
-        <activity android:name=".SUBSCRIBE.Activity_Subscribe_Contents_Detail"></activity>
-        <activity android:name=".MainActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".SUBSCRIBE.Activity_Subscribe_ContentsList"></activity>
+        <activity android:name=".SUBSCRIBE.Activity_Subscribe_Contents_Detail"></activity>
+        <activity android:name=".MainActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+
 
         </activity>
     </application>

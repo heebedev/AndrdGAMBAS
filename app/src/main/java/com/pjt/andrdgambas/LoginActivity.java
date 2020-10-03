@@ -69,8 +69,8 @@ public class LoginActivity extends AppCompatActivity {
 
         //앱 실행 시 로그인 토큰이 있으면 자동으로 로그인 수행
 
-        session = Session.getCurrentSession();
-        session.checkAndImplicitOpen();
+//        session = Session.getCurrentSession();
+//        session.checkAndImplicitOpen();
 
         btn_email.setOnClickListener(onClickListener);
         tv_signUp.setOnClickListener(onClickListener);

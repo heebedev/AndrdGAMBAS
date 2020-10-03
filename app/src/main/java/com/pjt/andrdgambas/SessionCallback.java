@@ -114,6 +114,7 @@ public class SessionCallback {
             }else { // uSeqno 값이 있으면 기존에 회원가입 했던 회원
                 intent = new Intent(mContext, MainActivity.class);
                 intent.putExtra("uSeqno", uSeqno);
+                HomeData.USERID = uSeqno;
                 mContext.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             }
         }catch (Exception e){

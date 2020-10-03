@@ -69,8 +69,6 @@ public class EmailLoginActivity extends AppCompatActivity {
         try {
             LoginNetworkTask loginNetworkTask = new LoginNetworkTask(EmailLoginActivity.this, urlAddr);
             returnpwd = loginNetworkTask.execute().get().toString();
-            uSeqno = loginNetworkTask.execute().get().toString();
-            Log.v("uSeqno", uSeqno);
 
             Log.v("패스워드",returnpwd);
             if (returnpwd.equals("null")){ // 디비에서 가져온 패스워드값이 null 이면 이메일이 없어요
@@ -86,7 +84,7 @@ public class EmailLoginActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) { // 확인누르면 로그인한 이메일들고 메인페이지로(아직안만들어서 첫페이지)
                                 intent = new Intent(EmailLoginActivity.this, MainActivity.class);
-                                intent.putExtra("uSeqno", uSeqno);
+                                intent.putExtra("uSeqno", HomeData.USERID);
                                 startActivity(intent);
                             }
                         })
