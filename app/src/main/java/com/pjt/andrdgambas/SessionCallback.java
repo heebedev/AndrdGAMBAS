@@ -22,7 +22,7 @@ public class SessionCallback {
 
     public String uEmail;
     String urlAddr;
-    String centIP = "192.168.2.61";
+    String centIP = HomeData.CENIP;
     Intent intent;
     String uSeqno;
     private Context mContext;
@@ -109,7 +109,7 @@ public class SessionCallback {
             Log.v("uSeqno",uSeqno);
             if (uSeqno.equals("null")){ // 디비에 저장되어 있지 않은 회원
                 intent = new Intent(mContext, SignUpActivity.class);
-                intent.putExtra("uSeqno", uSeqno);
+                intent.putExtra("uEmail", uEmail);
                 mContext.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             }else { // uSeqno 값이 있으면 기존에 회원가입 했던 회원
                 intent = new Intent(mContext, MainActivity.class);

@@ -25,7 +25,7 @@ public class EmailLoginActivity extends AppCompatActivity {
     Intent intent;
     ImageView iv_main;
     String email, pw, uSeqno, urlAddr;
-    String centIP = "192.168.2.61";
+    String centIP = HomeData.CENIP;
     String returnpwd = "";
 
     @Override
@@ -93,7 +93,6 @@ public class EmailLoginActivity extends AppCompatActivity {
                         .show();
             }
             else { // 이메일과 비밀번호가 디비에 저장되어 있는거랑 다름
-                Log.v("받아온거",pw);
                 tv_dialog2.setText("비밀번호를 확인해주세요.");
 
             }
