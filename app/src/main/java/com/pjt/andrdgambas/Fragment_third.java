@@ -8,13 +8,13 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
-public class Fragment_first extends Fragment {
+public class Fragment_third extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.tab1, container, false);
-        Log.v("tab1","tab1");
+        View view = inflater.inflate(R.layout.tab3, container, false);
+        Log.v("tab3","tab3");
         return view;
     }
-
+    
 }

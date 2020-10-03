@@ -1,5 +1,7 @@
 package com.pjt.andrdgambas;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -17,7 +19,8 @@ public class Adapter_MainViewPager extends FragmentPagerAdapter {
         mFragmentTitleList.add(title);
     }
 
-
+    @Nullable
+    @Override
     public CharSequence getPageTitle(int position) {
         return mFragmentTitleList.get(position);
     }
@@ -25,6 +28,7 @@ public class Adapter_MainViewPager extends FragmentPagerAdapter {
         super(manager);
     }
 
+    @NonNull
     @Override
     public Fragment getItem(int position) {
         return mFragmentList.get(position);

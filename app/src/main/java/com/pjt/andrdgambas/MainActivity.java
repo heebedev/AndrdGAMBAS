@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
@@ -47,8 +46,6 @@ public class MainActivity extends AppCompatActivity {
         setNavItemListener();
         setViewPager();
         setTabLayout();
-
-
     }
 
     public void setItems() {
@@ -85,9 +82,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void setViewPager() {
         adapter = new Adapter_MainViewPager(getSupportFragmentManager());
-        adapter.addFragment(new Fragment_first(), "탭1");
+        adapter.addFragment(new Fragment_home(), "HOME");
         adapter.addFragment(new Fragment_second(), "탭2");
-        adapter.addFragment(new Fragment_Subscribe(), "Subscribe");
+        adapter.addFragment(new Fragment_third(), "탭3");
         adapter.addFragment(new Fragment_fourth(), "탭4");
         viewPager.setAdapter(adapter);
     }
