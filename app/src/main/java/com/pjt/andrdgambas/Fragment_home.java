@@ -125,9 +125,9 @@ public class Fragment_home extends Fragment {
         // 리사이클러뷰에 LinearLayoutManager 객체 지정.
         recyclerView_rec.setLayoutManager(mLayoutManager) ;
 
-        urlAddr = "http://" + centIP + ":8080/test/getUserCategoryList_android.jsp?seq=" + uSeqno;
+        urlAddr = "http://localhost:8080/gambas/getUserCategoryList_android.jsp?seq=" + uSeqno;
         connectionCGGetData(urlAddr);
-        urlAddr = "http://" + centIP + ":8080/test/getRecommendData_android.jsp?category=";
+        urlAddr = "http://localhost:8080/gambas/getRecommendData_android.jsp?category=";
         Log.v("urlAddr",urlAddr);
         connectionCTGetData(urlAddr);
         // init Adapter

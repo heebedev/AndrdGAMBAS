@@ -83,9 +83,9 @@ public class MainActivity extends AppCompatActivity {
     public void setViewPager() {
         adapter = new Adapter_MainViewPager(getSupportFragmentManager());
         adapter.addFragment(new Fragment_home(), "HOME");
-        adapter.addFragment(new Fragment_second(), "탭2");
-        adapter.addFragment(new Fragment_third(), "탭3");
-        adapter.addFragment(new Fragment_fourth(), "탭4");
+        adapter.addFragment(new Fragment_second(), "NOTICE");
+        adapter.addFragment(new Fragment_third(), "SUBSCRIBE");
+        adapter.addFragment(new Fragment_fourth(), "MYINFO");
         viewPager.setAdapter(adapter);
     }
 
