@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.pjt.andrdgambas.HOME.HomeData;
+import com.pjt.andrdgambas.STATICDATA;
 
 import org.json.JSONObject;
 import java.io.BufferedReader;
@@ -99,7 +100,15 @@ public class LoginNetworkTask extends AsyncTask<Integer, String , Object> {
             JSONObject jsonObject = new JSONObject(s);
             returnpwd = jsonObject.getString("uPassword"); // 디비에서 패스워드 받아옴
             HomeData.USERID = jsonObject.getString("uSeqno");
+            STATICDATA.USEQNO = jsonObject.getString("uSeqno");
+            STATICDATA.UNAME = jsonObject.getString("uName");
+            STATICDATA.UEMAIL = jsonObject.getString("uEmail");
+            STATICDATA.UCreaterSubs = jsonObject.getString("uCreaterSubs");
             Log.v("디비 패스워드",returnpwd);
+            Log.e("LoginNtwTask", STATICDATA.USEQNO);
+            Log.e("LoginNtwTask", STATICDATA.UNAME);
+            Log.e("LoginNtwTask", STATICDATA.UEMAIL);
+            Log.e("LoginNtwTask", STATICDATA.UCreaterSubs);
 
         }catch (Exception e){
             e.printStackTrace();

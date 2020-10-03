@@ -2,30 +2,40 @@ package com.pjt.andrdgambas.NOTICE;
 
 public class NoticeList {
 
-    String title;
-    String subTitle;
+    String nName;
+    String nDetailName;
+    String nCode;
 
     public NoticeList() {
     }
 
-    public NoticeList(String title, String subTitle) {
-        this.title = title;
-        this.subTitle = subTitle;
+    public NoticeList(String nName, String nDetailName, String nCode) {
+        this.nName = nName;
+        this.nDetailName = nDetailName;
+        this.nCode = nCode;
     }
 
-    public String getTitle() {
-        return title;
+    public String getnName() {
+        return nName;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setnName(String nName) {
+        this.nName = nName;
     }
 
-    public String getSubTitle() {
-        return subTitle;
+    public String getnDetailName() {
+        return nDetailName;
     }
 
-    public void setSubTitle(String subTitle) {
-        this.subTitle = subTitle;
+    public void setnDetailName(String nDetailName) {
+        this.nDetailName = nDetailName;
+    }
+
+    public String getnCode() {
+        return nCode;
+    }
+
+    public void setnCode(String nCode) {
+        this.nCode = nCode;
     }
 }
