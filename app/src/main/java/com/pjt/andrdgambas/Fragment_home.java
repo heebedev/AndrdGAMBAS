@@ -127,7 +127,7 @@ public class Fragment_home extends Fragment {
 
         urlAddr = "http://" + centIP + ":8080/test/getUserCategoryList_android.jsp?seq=" + uSeqno;
         connectionCGGetData(urlAddr);
-        urlAddr = "http://" + centIP + ":8080/test/getRecommendData.jsp?category=";
+        urlAddr = "http://" + centIP + ":8080/test/getRecommendData_android.jsp?category=";
         Log.v("urlAddr",urlAddr);
         connectionCTGetData(urlAddr);
         // init Adapter
@@ -160,7 +160,7 @@ public class Fragment_home extends Fragment {
             }
             recyclerViews[idx-1].setVisibility(recyclerViews[idx-1].VISIBLE);
             textViews[idx-1].setVisibility(textViews[idx-1].VISIBLE);
-            urlAddr = "http://" + centIP + ":8080/test/getCategoryData.jsp?category=" + categoryList[i];
+            urlAddr = "http://" + centIP + ":8080/test/getCategoryData_android.jsp?category=" + categoryList[i];
             Log.v("urlAddr", urlAddr);
             connectionCTGetData(urlAddr);
             // init Adapter
