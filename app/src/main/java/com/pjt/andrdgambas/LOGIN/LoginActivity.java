@@ -1,11 +1,9 @@
-package com.pjt.andrdgambas;
+package com.pjt.andrdgambas.LOGIN;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -17,19 +15,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.kakao.auth.AuthType;
 import com.kakao.auth.Session;
-import com.kakao.usermgmt.UserManagement;
-import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.kakao.util.helper.Utility;
+import com.pjt.andrdgambas.HOME.HomeData;
+import com.pjt.andrdgambas.HOME.MainActivity;
+import com.pjt.andrdgambas.R;
 
-import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class LoginActivity extends AppCompatActivity {
 
-    Button btn_email;
+    Button btn_email, btn_test;
     TextView tv_signUp;
     Intent intent;
 
@@ -69,8 +66,8 @@ public class LoginActivity extends AppCompatActivity {
 
         //앱 실행 시 로그인 토큰이 있으면 자동으로 로그인 수행
 
-        session = Session.getCurrentSession();
-        session.checkAndImplicitOpen();
+//        session = Session.getCurrentSession();
+//        session.checkAndImplicitOpen();
 
         btn_email.setOnClickListener(onClickListener);
         tv_signUp.setOnClickListener(onClickListener);

@@ -1,17 +1,15 @@
 package com.pjt.andrdgambas.SUBSCRIBE;
 
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.pjt.andrdgambas.HomeData;
+import com.pjt.andrdgambas.HOME.HomeData;
 import com.pjt.andrdgambas.R;
 import com.pjt.andrdgambas.STATICDATA;
 

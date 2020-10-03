@@ -1,7 +1,6 @@
-package com.pjt.andrdgambas;
+package com.pjt.andrdgambas.HOME;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,18 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
+import com.pjt.andrdgambas.LOGIN.LoginActivity;
+import com.pjt.andrdgambas.R;
 
 import java.util.ArrayList;
 
@@ -38,7 +37,6 @@ public class Fragment_home extends Fragment {
     Intent intent;
     HomeAdapter adapter;
     String [] categoryList;
-    String uSeqno = "2";
     RecyclerView [] recyclerViews;
     TextView [] textViews;
 
@@ -125,10 +123,11 @@ public class Fragment_home extends Fragment {
         // 리사이클러뷰에 LinearLayoutManager 객체 지정.
         recyclerView_rec.setLayoutManager(mLayoutManager) ;
 
-        urlAddr = "http://" + centIP + ":8080/gambas/getUserCategoryList_android.jsp?seq=" + uSeqno;
+        urlAddr = "http://" + centIP + ":8080/gambas/getUserCategoryList_android.jsp?seq=" + HomeData.USERID;
+        Log.e("Status", urlAddr);
         connectionCGGetData(urlAddr);
         urlAddr = "http://" + centIP + ":8080/gambas/getRecommendData_android.jsp?category=";
-        Log.v("urlAddr",urlAddr);
+        Log.e("Status", urlAddr);
         connectionCTGetData(urlAddr);
         // init Adapter
         adapter = new HomeAdapter(getActivity(), list) ;
@@ -161,7 +160,6 @@ public class Fragment_home extends Fragment {
             recyclerViews[idx-1].setVisibility(recyclerViews[idx-1].VISIBLE);
             textViews[idx-1].setVisibility(textViews[idx-1].VISIBLE);
             urlAddr = "http://" + centIP + ":8080/test/getCategoryData_android.jsp?category=" + categoryList[i];
-            Log.v("urlAddr", urlAddr);
             connectionCTGetData(urlAddr);
             // init Adapter
             adapter = new HomeAdapter(getActivity(), list) ;
@@ -169,18 +167,6 @@ public class Fragment_home extends Fragment {
             recyclerViews[idx-1].setAdapter(adapter);
         }
 
-
-
-        //어뎁터 안에 만든 리스너를 불러와서 사용한다
-//        adapter.setOnItemClickListener(new HomeAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClickListener(View v, int position) {
-//                Intent intent = new Intent(mContext,SelectFood.class);
-//                intent.putExtra("seq",list.get(position).getSeq());
-//                intent.putExtra("view",list.get(position).getView());
-//                startActivity(intent);
-//            }
-//        });
 
         btn_logout = view.findViewById(R.id.btn_logout);
 

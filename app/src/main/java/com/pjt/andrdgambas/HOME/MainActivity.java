@@ -1,4 +1,4 @@
-package com.pjt.andrdgambas;
+package com.pjt.andrdgambas.HOME;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -17,7 +17,12 @@ import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
-import com.pjt.andrdgambas.SUBSCRIBE.Fragment_Subscribe;
+import com.pjt.andrdgambas.Adapter_MainViewPager;
+import com.pjt.andrdgambas.Fragment_fourth;
+import com.pjt.andrdgambas.Fragment_third;
+import com.pjt.andrdgambas.HOME.Fragment_home;
+import com.pjt.andrdgambas.NOTICE.Fragment_notice;
+import com.pjt.andrdgambas.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -83,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
     public void setViewPager() {
         adapter = new Adapter_MainViewPager(getSupportFragmentManager());
         adapter.addFragment(new Fragment_home(), "HOME");
-        adapter.addFragment(new Fragment_second(), "NOTICE");
+        adapter.addFragment(new Fragment_notice(), "NOTICE");
         adapter.addFragment(new Fragment_third(), "SUBSCRIBE");
         adapter.addFragment(new Fragment_fourth(), "MYINFO");
         viewPager.setAdapter(adapter);

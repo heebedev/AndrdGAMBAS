@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.pjt.andrdgambas.HomeData;
+import com.pjt.andrdgambas.HOME.HomeData;
 import com.pjt.andrdgambas.R;
 import com.pjt.andrdgambas.STATICDATA;
 
