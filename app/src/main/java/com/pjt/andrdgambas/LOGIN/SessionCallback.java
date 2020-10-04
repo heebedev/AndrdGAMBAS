@@ -1,11 +1,8 @@
-package com.pjt.andrdgambas;
+package com.pjt.andrdgambas.LOGIN;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
-
-import androidx.appcompat.app.AlertDialog;
 
 import com.kakao.auth.ISessionCallback;
 import com.kakao.network.ErrorResult;
@@ -17,6 +14,10 @@ import com.kakao.usermgmt.response.model.Profile;
 import com.kakao.usermgmt.response.model.UserAccount;
 import com.kakao.util.OptionalBoolean;
 import com.kakao.util.exception.KakaoException;
+import com.pjt.andrdgambas.HOME.HomeData;
+import com.pjt.andrdgambas.HOME.MainActivity;
+import com.pjt.andrdgambas.LOGIN.LoginNetworkTask;
+import com.pjt.andrdgambas.LOGIN.SignUpActivity;
 
 public class SessionCallback {
 

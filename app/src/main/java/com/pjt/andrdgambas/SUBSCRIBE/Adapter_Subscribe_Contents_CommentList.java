@@ -1,16 +1,15 @@
 package com.pjt.andrdgambas.SUBSCRIBE;
 
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.pjt.andrdgambas.HOME.HomeData;
 import com.pjt.andrdgambas.R;
 import com.pjt.andrdgambas.STATICDATA;
 
@@ -46,7 +45,7 @@ public class Adapter_Subscribe_Contents_CommentList extends RecyclerView.Adapter
         holder.tv_cmcontext.setText(commentlist.get(position).getCmcontext());
 
         //댓글작성자만 삭제 가능하도록 삭제 표시
-        if(commentlist.get(position).getuSeqno().equals(STATICDATA.USEQNO)){
+        if(commentlist.get(position).getuSeqno().equals(HomeData.USERID)){
             holder.tv_delete_comment.setVisibility(View.VISIBLE);
         }else{
             holder.tv_delete_comment.setVisibility(View.GONE);

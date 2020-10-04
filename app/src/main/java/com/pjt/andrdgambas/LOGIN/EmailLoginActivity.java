@@ -1,4 +1,4 @@
-package com.pjt.andrdgambas;
+package com.pjt.andrdgambas.LOGIN;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,8 +13,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.Map;
-import java.util.Set;
+import com.pjt.andrdgambas.HOME.HomeData;
+import com.pjt.andrdgambas.HOME.MainActivity;
+import com.pjt.andrdgambas.R;
 
 public class EmailLoginActivity extends AppCompatActivity {
 
