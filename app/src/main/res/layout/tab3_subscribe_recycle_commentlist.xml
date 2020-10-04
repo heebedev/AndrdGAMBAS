@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="61dp"
+        android:orientation="horizontal"
+        android:paddingLeft="5dp">
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingLeft="10dp">
+
+            <TextView
+                android:id="@+id/tv_contents_comment_uName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="3dp"
+                android:paddingRight="7dp"
+                android:text="uName"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_contents_comment_cmRegistDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="cmRegistDate" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:gravity="center_vertical">
+
+    <!-- uSeqno 동일할때만 삭제 버튼 보이게하기 -->
+            <TextView
+                android:id="@+id/tv_contents_comment_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginRight="10dp"
+                android:text="X"
+                android:textSize="20dp"
+                android:visibility="visible"/>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tv_contents_comment_cmcontext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="10dp"
+        android:text="cmcontext 댓글내용나오는곳 댓글내용나오는곳 댓글내용나오는곳 댓글내용나오는곳 댓글내용나오는곳 댓글내용나오는곳 댓글내용나오는곳 댓글내용나오는곳 댓글내용나오는곳 댓글내용나오는곳 댓글내용나오는곳 댓글내용나오는곳 댓글내용나오는곳 "/>
+
+
+</LinearLayout>
