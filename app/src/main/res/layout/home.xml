@@ -10,7 +10,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
     <TextView
-
+        android:textColor="#8db0e8"
+        android:textStyle="bold"
         android:layout_gravity="center"
         android:id="@+id/tv_rec"
         android:layout_width="wrap_content"
@@ -31,6 +32,8 @@
             />
     </LinearLayout>
     <TextView
+        android:textColor="#8db0e8"
+        android:textStyle="bold"
         android:layout_marginTop="20dp"
         android:layout_gravity="center"
         android:id="@+id/tv_1"
@@ -52,6 +55,8 @@
             />
     </LinearLayout>
     <TextView
+        android:textColor="#8db0e8"
+        android:textStyle="bold"
         android:layout_marginTop="20dp"
         android:layout_gravity="center"
         android:id="@+id/tv_2"
@@ -71,6 +76,8 @@
             android:layout_height="match_parent"/>
     </LinearLayout>
     <TextView
+        android:textColor="#8db0e8"
+        android:textStyle="bold"
         android:layout_marginTop="20dp"
         android:layout_gravity="center"
         android:id="@+id/tv_3"
@@ -92,6 +99,8 @@
         />
     </LinearLayout>
     <TextView
+        android:textColor="#8db0e8"
+        android:textStyle="bold"
         android:layout_marginTop="20dp"
         android:layout_gravity="center"
         android:id="@+id/tv_4"
@@ -113,6 +122,8 @@
             />
     </LinearLayout>
     <TextView
+        android:textColor="#8db0e8"
+        android:textStyle="bold"
         android:layout_marginTop="20dp"
         android:layout_gravity="center"
         android:id="@+id/tv_5"

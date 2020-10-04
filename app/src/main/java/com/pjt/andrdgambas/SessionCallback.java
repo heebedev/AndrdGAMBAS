@@ -69,7 +69,7 @@ public class SessionCallback {
                                     Log.i("KAKAO_API", "email: " + uEmail);
                                     if (uEmail == "null" || uEmail == null) {
                                     } else {
-                                        urlAddr = "http://" + centIP + ":8080/test/GAMBAS_emailLogin.jsp?"; // centIP 는 항상 위에
+                                        urlAddr = "http://" + centIP + ":8080/gambas/GAMBAS_emailLogin.jsp?"; // centIP 는 항상 위에
                                         urlAddr = urlAddr + "uEmail=" + uEmail;
                                         Log.v("URL", urlAddr);
                                         connectionloginData(urlAddr);

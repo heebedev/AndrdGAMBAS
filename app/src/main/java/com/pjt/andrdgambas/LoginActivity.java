@@ -87,6 +87,10 @@ public class LoginActivity extends AppCompatActivity {
                 case R.id.btn_kakao_login:
                     btn_kakao_login.performClick();
                     break;
+                case R.id.tv_signUp:
+                    intent = new Intent(LoginActivity.this, SignUpActivity.class);
+                    startActivity(intent);
+                    break;
             }
         }
     };

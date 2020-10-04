@@ -60,7 +60,7 @@ public class Fragment_home extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup view = (ViewGroup)inflater.inflate(R.layout.home, container, false);
         recyclerView1 = view.findViewById(R.id.recycler_list_writing);
         recyclerView2 = view.findViewById(R.id.recycler_list_drawing);
@@ -125,12 +125,21 @@ public class Fragment_home extends Fragment {
         recyclerView_rec.setLayoutManager(mLayoutManager) ;
 
 
-        urlAddr = "http://" + centIP + ":8080/test/getUserCategoryList_android.jsp?seq=" + HomeData.USERID;
+
+        urlAddr = "http://" + centIP + ":8080/gambas/getUserCategoryList_android.jsp?seq=" + HomeData.USERID;
         connectionCGGetData(urlAddr);
-        urlAddr = "http://" + centIP + ":8080/test/getRecommendData_android.jsp?category=";
+        urlAddr = "http://" + centIP + ":8080/gambas/getRecommendData_android.jsp?category=";
         connectionCTGetData(urlAddr);
         // init Adapter
         adapter = new HomeAdapter(getActivity(), list) ;
+        adapter.setOnItemClickListener(new HomeAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClickListener1(View v, int position) {
+                intent = new Intent(getActivity(), LoginActivity.class);
+                intent.putExtra("prdSeq",list.get(position).getPrdSeq());
+                startActivity(intent);
+            }
+        });
         recyclerView_rec.setAdapter(adapter);
 
         recyclerViews = new RecyclerView[]{recyclerView1, recyclerView2, recyclerView3, recyclerView4, recyclerView5};
@@ -159,13 +168,23 @@ public class Fragment_home extends Fragment {
             }
             recyclerViews[idx-1].setVisibility(recyclerViews[idx-1].VISIBLE);
             textViews[idx-1].setVisibility(textViews[idx-1].VISIBLE);
-            urlAddr = "http://" + centIP + ":8080/test/getCategoryData_android.jsp?category=" + categoryList[i];
+            urlAddr = "http://" + centIP + ":8080/gambas/getCategoryData_android.jsp?category=" + categoryList[i];
             connectionCTGetData(urlAddr);
             // init Adapter
             adapter = new HomeAdapter(getActivity(), list) ;
+            adapter.setOnItemClickListener(new HomeAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClickListener1(View v, int position) {
+                    intent = new Intent(getActivity(), LoginActivity.class);
+                    intent.putExtra("prdSeq",list.get(position).getPrdSeq());
+                    startActivity(intent);
+                }
+            });
             // set Adapter
             recyclerViews[idx-1].setAdapter(adapter);
         }
+
+        adapter = new HomeAdapter(getActivity(), list);
 
 
         btn_logout = view.findViewById(R.id.btn_logout);

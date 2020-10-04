@@ -21,33 +21,33 @@
 
         <Button
             android:id="@+id/btn_email"
-            android:layout_width="300dp"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="이메일로 간편하게 로그인"
-            android:textColor="#A333C3"
-            android:background="#96D9F7"
-            android:textSize="20dp"
+            android:textColor="#c19fc2"
+            android:background="#00FF0000"
+            android:textSize="18dp"
             android:layout_gravity="center"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="80dp"
             />
 
         <com.kakao.usermgmt.LoginButton
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="40dp"
             android:id="@+id/btn_kakao_login"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"/>
 
+
         <TextView
             android:id="@+id/tv_signUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="40dp"
             android:text="회원가입"
-            android:textColor="#000000"
-            android:textSize="20dp"
-            android:layout_gravity="center"
-            android:textStyle="italic"/>
+            android:textColor="#c19fc2"
+            android:textSize="18dp"
+            android:layout_gravity="center"/>
 
 
     </LinearLayout>

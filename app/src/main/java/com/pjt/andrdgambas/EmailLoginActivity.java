@@ -56,7 +56,7 @@ public class EmailLoginActivity extends AppCompatActivity {
                         tv_dialog2.setText("이메일 또는 비밀번호를 확인해주세요.");
                     }else{
                         urlAddr = "";
-                        urlAddr = "http://" + centIP + ":8080/test/GAMBAS_emailLogin.jsp?"; // centIP 는 항상 위에
+                        urlAddr = "http://" + centIP + ":8080/gambas/GAMBAS_emailLogin.jsp?"; // centIP 는 항상 위에
                         urlAddr = urlAddr + "uEmail=" + email;
                         Log.v("URL",urlAddr);
                         connectionloginData();
