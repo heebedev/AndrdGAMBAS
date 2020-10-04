@@ -1,11 +1,8 @@
 package com.pjt.andrdgambas.LOGIN;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -19,6 +16,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import com.kakao.auth.Session;
 import com.kakao.util.helper.Utility;
+import com.pjt.andrdgambas.FIREBASE.AddContentsActivity;
+
 import com.pjt.andrdgambas.HOME.HomeData;
 import com.pjt.andrdgambas.HOME.MainActivity;
 import com.pjt.andrdgambas.R;
@@ -83,6 +82,7 @@ public class LoginActivity extends AppCompatActivity {
         btn_login.setOnClickListener(onClickListener);
         tv_signUp.setOnClickListener(onClickListener);
         tv_findIdPw.setOnClickListener(onClickListener);
+
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -112,8 +112,7 @@ public class LoginActivity extends AppCompatActivity {
                     break;
                 case R.id.tv_findIdPw:
                     intent = new Intent(LoginActivity.this, FindIdPwActivity.class);
-                    startActivity(intent);
-                    break;
+
             }
         }
     };

@@ -7,20 +7,17 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
+import com.pjt.andrdgambas.MYINFO.Fragment_myinfo;
+import com.pjt.andrdgambas.SUBSCRIBE.Fragment_Subscribe;
 import com.pjt.andrdgambas.Adapter_MainViewPager;
-import com.pjt.andrdgambas.Fragment_fourth;
-import com.pjt.andrdgambas.Fragment_third;
-import com.pjt.andrdgambas.HOME.Fragment_home;
 import com.pjt.andrdgambas.NOTICE.Fragment_notice;
 import com.pjt.andrdgambas.R;
 
@@ -89,8 +86,8 @@ public class MainActivity extends AppCompatActivity {
         adapter = new Adapter_MainViewPager(getSupportFragmentManager());
         adapter.addFragment(new Fragment_home(), "HOME");
         adapter.addFragment(new Fragment_notice(), "NOTICE");
-        adapter.addFragment(new Fragment_third(), "SUBSCRIBE");
-        adapter.addFragment(new Fragment_fourth(), "MYINFO");
+        adapter.addFragment(new Fragment_Subscribe(), "SUBSCRIBE");
+        adapter.addFragment(new Fragment_myinfo(), "MYINFO");
         viewPager.setAdapter(adapter);
     }
 

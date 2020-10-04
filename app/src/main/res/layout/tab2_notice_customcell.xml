@@ -3,9 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:paddingLeft="10dp"
     android:paddingTop="5dp"
-    android:paddingRight="10dp"
     android:paddingBottom="5dp">
 
     <FrameLayout
@@ -19,6 +17,8 @@
             android:layout_height="36dp"
             android:gravity="center"
             android:text="홍길동"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:textAlignment="center"
             android:textColor="#3a3a3a"
             android:layout_gravity="center"
@@ -27,7 +27,7 @@
         <ImageView
             android:id="@+id/iv_noticeList"
             android:layout_width="match_parent"
-            android:layout_height="36dp"
+            android:layout_height="44dp"
             android:layout_gravity="center"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"

@@ -1,5 +1,6 @@
 package com.pjt.andrdgambas.HOME;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -24,6 +26,11 @@ import com.pjt.andrdgambas.R;
 import java.util.ArrayList;
 
 public class Fragment_home extends Fragment {
+
+    WebView webView;
+    ProgressDialog pDialog;
+    private static final String TAG = "Load Firebase";
+    String filename = "202010115334pink.pdf";
 
     ArrayList<HomeData> list;
     RecyclerView recyclerView1, recyclerView2, recyclerView3, recyclerView4, recyclerView5, recyclerView_rec;
