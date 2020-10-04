@@ -55,6 +55,7 @@ public class Fragment_myinfo extends Fragment {
         lv_review = view.findViewById(R.id.lv_review);
         imageView = view.findViewById(R.id.img_user);
 
+
         // UCreaterSubs가 0일 때만 등록하기 버튼 보여주기
         if (STATICDATA.UCreaterSubs.equals("0")) {
             btn_register_creator.setVisibility(View.VISIBLE);

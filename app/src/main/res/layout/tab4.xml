@@ -23,21 +23,21 @@
                 android:id="@+id/img_user"
                 android:layout_width="0px"
                 android:layout_height="match_parent"
-                android:layout_weight="0.5"
+                android:layout_weight="1.5"
                 android:layout_gravity="left"
                 android:src="@drawable/logo"/>
 
             <TextView
                 android:id="@+id/tv_get_user_name"
-                android:layout_width="0px"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:paddingLeft="20dp"
                 android:text="SAMPLE NAME"
                 android:textColor="#000000"
-                android:textSize="20dp"
+                android:textSize="16dp"
                 android:layout_gravity="center"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             </LinearLayout>
 

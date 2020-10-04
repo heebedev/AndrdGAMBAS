@@ -17,6 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/GAMBASTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".MYCHANNEL.ContentListActivity"></activity>
+        <activity android:name=".MYCHANNEL.ContentUploadActivity" />
         <activity android:name=".MYINFO.ChangePasswordActivity" />
         <activity android:name=".PRDDETAIL.PrdDetailActivity" />
         <activity android:name=".PRDDETAIL.NewReviewActivity" />
