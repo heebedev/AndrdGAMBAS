@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pjt.andrdgambas.R;
+import com.pjt.andrdgambas.STATICDATA;
 
 import java.util.ArrayList;
 
@@ -20,9 +21,9 @@ public class Fragment_prdDetailList extends Fragment {
 
     String logTitle = "Fragment_prdDetailList";
 
-    String userSeq = "1";
-    String prdSeq = "1";
-    String serverIP = "121.136.117.110";
+    String userSeq ;
+    String prdSeq;
+    String CENTIP;
 
     ArrayList<Bean_PrdDetailList> reviewData = null;
     Adapter_PrdDetailList_Review adapter;
@@ -34,6 +35,10 @@ public class Fragment_prdDetailList extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tab_prd_detail_list, container, false);
+
+        userSeq = STATICDATA.USEQNO;
+        prdSeq = STATICDATA.PRD_SEQNO;
+        CENTIP = STATICDATA.CENTIP;
 
         setItems(view);
         getData(prdSeq);
@@ -51,7 +56,7 @@ public class Fragment_prdDetailList extends Fragment {
     }
 
     private void getData(String pSeq){
-        String URL = "http://" + serverIP + ":8080//gambas/prdDetailList.jsp?prdSeqno="+pSeq;
+        String URL = "http://" + CENTIP + ":8080//gambas/prdDetailList.jsp?prdSeqno="+pSeq;
         try{
             NetworkTask__PrdDetailList networkTask = new NetworkTask__PrdDetailList(getActivity(), URL);
             Log.v(logTitle,URL);

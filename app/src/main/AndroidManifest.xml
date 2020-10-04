@@ -30,7 +30,8 @@
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
         <activity android:name=".LOGIN.EmailLoginActivity" />
-        <activity android:name=".LOGIN.LoginActivity">
+        <activity android:name=".LOGIN.LoginActivity"
+                    android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

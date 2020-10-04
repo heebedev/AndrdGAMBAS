@@ -217,20 +217,14 @@ public class SignUpActivity extends AppCompatActivity {
 
             //storage
             FirebaseStorage storage = FirebaseStorage.getInstance();
-
-            //storage 주소와 폴더 파일명을 지정해 준다.
-            // gs://gambas-b06ab.appspot.com/gambasFiles
+            //storage 저장소 오픈
             StorageReference storageRef = storage.getReference();
-            // 승희가 보내준부분
-            StorageReference mountainsRef = storageRef.child(filename);
-            StorageReference mountainImagesRef = storageRef.child("uImage/" + filename);
-            mountainsRef.getName().equals(mountainImagesRef.getName());    // true
-            mountainsRef.getPath().equals(mountainImagesRef.getPath());    // false
-            // 수빈이부분
-            // StorageReference storageRef = storage.getReferenceFromUrl("gs://gambas-174df.appspot.com").child("uImage/" + filename);
-            Log.v(TAG, String.valueOf(storageRef));
+            // 저장 루트 지정
+            StorageReference folderRef = storageRef.child("uImage");
+            StorageReference imageRef = folderRef.child(filename);
+
             // upload
-            storageRef.putFile(filePath)
+            imageRef.putFile(filePath)
                     // 성공시
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
@@ -312,8 +306,9 @@ public class SignUpActivity extends AppCompatActivity {
     private void IdDoubleChk(int cntId) {
             if(cntId == 1) {
                 Log.v("이메일체크",Integer.toString(cntId));
-//                Toast.makeText(SignUpActivity.this, "사용할 수 없는 이메일입니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SignUpActivity.this, "사용할 수 없는 이메일입니다.", Toast.LENGTH_SHORT).show();
             }else{
+                Toast.makeText(SignUpActivity.this, "사용가능한 이메일입니다.", Toast.LENGTH_SHORT).show();
                 edit_pw.setEnabled(true);
                 edit_pwChk.setEnabled(true);
                 edit_name.setEnabled(true);

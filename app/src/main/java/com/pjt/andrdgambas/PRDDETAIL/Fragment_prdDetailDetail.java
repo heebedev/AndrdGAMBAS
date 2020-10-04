@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.pjt.andrdgambas.R;
+import com.pjt.andrdgambas.STATICDATA;
 
 import java.util.ArrayList;
 
@@ -19,9 +20,9 @@ public class Fragment_prdDetailDetail extends Fragment {
 
     String logTitle = "Fragment_prdDetailDetail";
 
-    String userSeq = "1";
-    String prdSeq = "1";
-    String serverIP = "121.136.117.110";
+    String userSeq;
+    String prdSeq;
+    String CENTIP;
 
     ArrayList<Bean_PrdDetailDetail_PrdData> prdData = null;
     ArrayList<Bean_PrdDetailDetail_ChData> chData = null;
@@ -32,6 +33,10 @@ public class Fragment_prdDetailDetail extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tab_prd_detail_detail, container, false);
+
+        userSeq = STATICDATA.USEQNO;
+        prdSeq = STATICDATA.PRD_SEQNO;
+        CENTIP = STATICDATA.CENTIP;
 
         setItems(view);
         getSampleData(prdSeq);
@@ -51,7 +56,7 @@ public class Fragment_prdDetailDetail extends Fragment {
     }
 
     private void getSampleData(String pSeq){
-        String URL = "http://" + serverIP + ":8080//gambas/prdDetailDetail_prdData.jsp?prdSeqno="+pSeq;
+        String URL = "http://" + CENTIP + ":8080//gambas/prdDetailDetail_prdData.jsp?prdSeqno="+pSeq;
         try{
             NetworkTask__PrdDetailDetail_prdData networkTask = new NetworkTask__PrdDetailDetail_prdData(getActivity(), URL);
             Log.v(logTitle,URL);
@@ -63,7 +68,7 @@ public class Fragment_prdDetailDetail extends Fragment {
     }
 
     private void getChannelData(String chSeq, String pSeq){
-        String URL = "http://" + serverIP + ":8080//gambas/prdDetailDetail_chData.jsp?chSeqno="+chSeq+"&prdSeqno="+pSeq;
+        String URL = "http://" + CENTIP + ":8080//gambas/prdDetailDetail_chData.jsp?chSeqno="+chSeq+"&prdSeqno="+pSeq;
         try{
             NetworkTask__PrdDetailDetail_chData networkTask = new NetworkTask__PrdDetailDetail_chData(getActivity(), URL);
             Log.v(logTitle,URL);
@@ -88,6 +93,7 @@ public class Fragment_prdDetailDetail extends Fragment {
         String suffix = "?alt=media";
         Glide.with(this)
                 .load(imgURL+imgloc+"%2F"+imgName+suffix)
+                .circleCrop()
                 .placeholder(R.drawable.gambaslogo)
                 .into(imageView);
     }

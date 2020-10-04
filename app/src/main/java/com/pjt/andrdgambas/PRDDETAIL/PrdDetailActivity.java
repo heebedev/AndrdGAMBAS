@@ -40,18 +40,15 @@ public class PrdDetailActivity extends AppCompatActivity {
     ViewPager viewPager;
 
 
-    private void init() {
-        userSeq = STATICDATA.USEQNO;
-        prdSeq = STATICDATA.PRD_SEQNO;
-        CENTIP = STATICDATA.CENTIP;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        init();
+        userSeq = STATICDATA.USEQNO;
+        prdSeq = STATICDATA.PRD_SEQNO;
+        CENTIP = STATICDATA.CENTIP;
+
         setItems();
         setToolbar();
         setClickListener();
@@ -145,6 +142,7 @@ public class PrdDetailActivity extends AppCompatActivity {
         String suffix = "?alt=media";
         Glide.with(this)
                 .load(imgURL+imgloc+"%2F"+imgName+suffix)
+                .circleCrop()
                 .placeholder(R.drawable.gambaslogo)
                 .into(imageView);
     }

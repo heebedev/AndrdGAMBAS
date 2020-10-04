@@ -7,7 +7,6 @@ public class STATICDATA {
     public static String PRD_SEQNO; // prdSeqno
     public static String CT_SEQNO; // ctSeqno
     public static String CM_SEQNO; // ctSeqno
-    public static String SUBS_SEQNO; //subsSeqno
 
     //<---------------USER
     public static String USEQNO; //= "1"; // uSeqno

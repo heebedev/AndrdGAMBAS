@@ -71,7 +71,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
                     int pos = getAdapterPosition();
 
                     STATICDATA.PRD_SEQNO = mData.get(pos).getPrdSeq();
-                    STATICDATA.SUBS_SEQNO = mData.get(pos).getSubs();
                     Log.e("PrdSeqno", String.valueOf(STATICDATA.PRD_SEQNO));
 
                     Intent intent = new Intent(view.getContext(), PrdDetailActivity.class);

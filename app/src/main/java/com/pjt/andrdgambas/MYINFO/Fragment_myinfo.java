@@ -147,6 +147,7 @@ public class Fragment_myinfo extends Fragment {
                             Log.v("Firebase URL", uri.toString());
                             Glide.with(getActivity())
                                     .load(uri.toString())
+                                    .circleCrop()
                                     .apply(new RequestOptions().centerCrop())
                                     .into(imageView);
                         }

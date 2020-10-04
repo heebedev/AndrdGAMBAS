@@ -66,6 +66,7 @@ public class Adapter_Subscribe_SubsList extends RecyclerView.Adapter<Adapter_Sub
                 Log.v("Firebase URL", uri.toString());
                 Glide.with(holder.itemView.getContext())
                         .load(uri.toString())
+                        .centerCrop()
                         .placeholder(R.drawable.ic_launcher_foreground) // 이미지 없을때 대체  // 교체 해야함
                         .error(R.drawable.ic_launcher_foreground) // 이미지 없을때 대체
                         .into(holder.iv_prdImage);

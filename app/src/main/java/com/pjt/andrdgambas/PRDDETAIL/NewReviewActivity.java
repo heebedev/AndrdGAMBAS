@@ -1,6 +1,7 @@
 package com.pjt.andrdgambas.PRDDETAIL;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -9,26 +10,37 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.pjt.andrdgambas.R;
+import com.pjt.andrdgambas.STATICDATA;
+import com.pjt.andrdgambas.SUBSCRIBE.Activity_Subscribe_Contents_Detail;
+import com.pjt.andrdgambas.SUBSCRIBE.NetworkTask_Subscribe_Insert_Update;
 
 public class NewReviewActivity extends AppCompatActivity {
 
     String logTitle = "PrdDetailActivity";
 
-    String userSeq = "1";
-    String prdSeq = "1";
-    String serverIP = "121.136.117.110";
+    String userSeq;
+    String prdSeq;
+    String CENTIP;
 
     EditText title,detail;
     ImageView rate1,rate2,rate3,rate4,rate5;
     Button submit;
 
     String rate = "5";
+    String urlAddrInsertReview;
+
+    private void init() {
+        userSeq = STATICDATA.USEQNO;
+        prdSeq = STATICDATA.PRD_SEQNO;
+        CENTIP = STATICDATA.CENTIP;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review_submit);
 
+        init();
         setItems();
         setClickListeners();
     }
@@ -56,6 +68,24 @@ public class NewReviewActivity extends AppCompatActivity {
     public void submitReview(){
         String strTitle = title.getText().toString();
         String strDetail = detail.getText().toString();
+
+        urlAddrInsertReview = "http://" + STATICDATA.CENTIP + ":8080/gambas/PrdReviewInsert.jsp?"; //get방식으로 넘겨줌
+        urlAddrInsertReview = urlAddrInsertReview + "&rTitle=" + strTitle + "&rContent=" + strDetail + "&rGrade=" + rate
+                + "&uSeqno=" + userSeq + "&prdSeqno=" + prdSeq;
+        try {
+            // 좋아요 갯수 변경 + 1
+            NetworkTask_PrdDetail_InsertReview networkTask_PrdDetail_InsertReview
+                    = new NetworkTask_PrdDetail_InsertReview(NewReviewActivity.this, urlAddrInsertReview);
+
+            networkTask_PrdDetail_InsertReview.execute().get();
+
+            //Toast.makeText(Activity_Subscribe_Contents_Detail.this, urlAddrInsertLike + "입력되었습니다.", Toast.LENGTH_SHORT).show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.v("좋아요  :", "등록 오류");
+        }
+
     }
 
     View.OnClickListener click = new View.OnClickListener() {
