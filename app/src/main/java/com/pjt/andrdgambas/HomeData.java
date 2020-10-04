@@ -1,8 +1,10 @@
 package com.pjt.andrdgambas;
 
 public class HomeData {
-    protected static String USERID=null;
-    protected static final String CENIP="192.168.35.203";
+    public static String USERID=null;
+    //protected static final String CENIP="192.168.35.203";
+    public static final String CENIP="192.168.0.4"; // 수빈
+
     String prdSeq;
     String title;
     String nickname;

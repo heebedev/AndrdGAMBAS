@@ -22,6 +22,7 @@ import com.kakao.auth.Session;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.kakao.util.helper.Utility;
+import com.pjt.andrdgambas.FIREBASE.AddContentsActivity;
 
 import java.net.URL;
 import java.security.MessageDigest;
@@ -74,6 +75,12 @@ public class LoginActivity extends AppCompatActivity {
 
         btn_email.setOnClickListener(onClickListener);
         tv_signUp.setOnClickListener(onClickListener);
+
+
+
+        // 수빈 테스트용 추가
+        Button btn_firebase = findViewById(R.id.btn_firebase);
+        btn_firebase.setOnClickListener(onClickListener);
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -86,6 +93,11 @@ public class LoginActivity extends AppCompatActivity {
                     break;
                 case R.id.btn_kakao_login:
                     btn_kakao_login.performClick();
+                    break;
+
+                case R.id.btn_firebase:
+                    intent = new Intent(LoginActivity.this, AddContentsActivity.class);
+                    startActivity(intent);
                     break;
             }
         }

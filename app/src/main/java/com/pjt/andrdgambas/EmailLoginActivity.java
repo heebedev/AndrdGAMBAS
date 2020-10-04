@@ -56,7 +56,7 @@ public class EmailLoginActivity extends AppCompatActivity {
                         tv_dialog2.setText("이메일 또는 비밀번호를 확인해주세요.");
                     }else{
                         urlAddr = "";
-                        urlAddr = "http://" + centIP + ":8080/test/GAMBAS_emailLogin.jsp?"; // centIP 는 항상 위에
+                        urlAddr = "http://" + centIP + ":8080/gambas/GAMBAS_emailLogin.jsp?"; // centIP 는 항상 위에
                         urlAddr = urlAddr + "uEmail=" + email;
                         Log.v("URL",urlAddr);
                         connectionloginData();
@@ -65,20 +65,18 @@ public class EmailLoginActivity extends AppCompatActivity {
         }
     };
     private void connectionloginData() {
-
         try {
             LoginNetworkTask loginNetworkTask = new LoginNetworkTask(EmailLoginActivity.this, urlAddr);
             returnpwd = loginNetworkTask.execute().get().toString();
-            uSeqno = loginNetworkTask.execute().get().toString();
-            Log.v("uSeqno", uSeqno);
+            //uSeqno = loginNetworkTask.execute().get().toString();
 
-            Log.v("패스워드",returnpwd);
             if (returnpwd.equals("null")){ // 디비에서 가져온 패스워드값이 null 이면 이메일이 없어요
                 tv_dialog2.setText("이메일을 확인해주세요.");
-
+            Log.v("결과","1");
 
             }else if(returnpwd.equals(pw)){ // 디비에서 가져온 비밀번호랑 입력한 비밀번호가 동일하면 로그인성공
-                // 로그인 성공
+                // 로그인 성공과
+                Log.v("결과", "2");
                 new AlertDialog.Builder(EmailLoginActivity.this)
                         .setTitle("로그인 성공!")
                         .setCancelable(false)
@@ -86,7 +84,6 @@ public class EmailLoginActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) { // 확인누르면 로그인한 이메일들고 메인페이지로(아직안만들어서 첫페이지)
                                 intent = new Intent(EmailLoginActivity.this, MainActivity.class);
-                                intent.putExtra("uSeqno", uSeqno);
                                 startActivity(intent);
                             }
                         })
@@ -94,6 +91,7 @@ public class EmailLoginActivity extends AppCompatActivity {
             }
             else { // 이메일과 비밀번호가 디비에 저장되어 있는거랑 다름
                 tv_dialog2.setText("비밀번호를 확인해주세요.");
+                Log.v("결과", "3");
 
             }
 

@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
+import com.pjt.andrdgambas.MYINFO.Fragment_fourth;
 import com.pjt.andrdgambas.SUBSCRIBE.Fragment_Subscribe;
 
 public class MainActivity extends AppCompatActivity {
@@ -85,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(new Fragment_home(), "HOME");
         adapter.addFragment(new Fragment_second(), "탭2");
         adapter.addFragment(new Fragment_third(), "탭3");
-        adapter.addFragment(new Fragment_fourth(), "탭4");
+        adapter.addFragment(new Fragment_fourth(), "MYINFO");
         viewPager.setAdapter(adapter);
     }
 

@@ -95,9 +95,9 @@ public class LoginNetworkTask extends AsyncTask<Integer, String , Object> {
         try {
             JSONObject jsonObject = new JSONObject(s);
             returnpwd = jsonObject.getString("uPassword"); // 디비에서 패스워드 받아옴
-            uSeqno = jsonObject.getString("uSeqno");
-            Log.v("디비 패스워드",returnpwd);
-            Log.v("uSeqno",uSeqno);
+            HomeData.USERID = jsonObject.getString("uSeqno");
+//            Log.v("디비 패스워드",returnpwd);
+//            Log.v("HomeData.USERID",HomeData.USERID);
         }catch (Exception e){
             e.printStackTrace();
         }
