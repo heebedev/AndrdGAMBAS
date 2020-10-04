@@ -105,4 +105,11 @@
             android:layout_gravity="center" />
     </LinearLayout>
 
+    <Button
+        android:id="@+id/go_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="수빈 테스트용"
+        android:background="#05ffffff"/>
+
 </LinearLayout>

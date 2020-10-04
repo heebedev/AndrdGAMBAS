@@ -1,10 +1,9 @@
-package com.pjt.andrdgambas.FIREBASE;
-
+package com.pjt.andrdgambas.MYCHANNEL;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,7 +16,7 @@ import android.provider.OpenableColumns;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,91 +26,81 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.pjt.andrdgambas.FIREBASE.AddContentsActivity;
+import com.pjt.andrdgambas.HOME.HomeData;
+import com.pjt.andrdgambas.MYINFO.ChangePasswordActivity;
+import com.pjt.andrdgambas.MYINFO.UpdateMyInfoActivity;
+import com.pjt.andrdgambas.MYINFO.UserUpdateTask;
 import com.pjt.andrdgambas.R;
+import com.pjt.andrdgambas.STATICDATA;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/*
-FireBase를 이용해 제작자 컨텐츠 업로드 기능을 구현 하는 Activity
- */
-
-
-public class AddContentsActivity extends Activity {
-
-    Button btn;
-    private static final String TAG = "MainActivity";
-
-    private Button btChoose;
-    private Button btUpload;
-    private ImageView ivPreview;
-    private TextView tvFile;
-    private String filename = "";
-
+public class ContentUploadActivity extends AppCompatActivity {
+    Intent intent;
+    EditText et_content_title, et_content_context;
+    Button btn_file_upload, btn_content_upload;
+    TextView tv_filename;
     private Uri filePath;
+    private String filename = "";
+    private static final String TAG = "ContentUploadActivity";
+    String urlAddr;
+    String centIP = STATICDATA.CENTIP;
+    String prdSeqno;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_contents);
+        setContentView(R.layout.activity_content_upload);
 
-        btn = findViewById(R.id.btn_test);
+        et_content_title = findViewById(R.id.et_content_title);
+        et_content_context = findViewById(R.id.et_content_context);
+        btn_file_upload = findViewById(R.id.btn_file_upload);
+        btn_content_upload = findViewById(R.id.btn_content_upload);
+        tv_filename = findViewById(R.id.tv_content_filename);
 
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent;
-                intent = new Intent(AddContentsActivity.this, TestContentsActivity.class);
-                startActivity(intent);
-            }
-        });
+        btn_file_upload.setOnClickListener(onClickListener);
+        btn_content_upload.setOnClickListener(onClickListener);
 
+        intent = getIntent();
+        prdSeqno = intent.getStringExtra("prdSeqno");
 
-
-        btChoose = findViewById(R.id.bt_choose);
-        btUpload = findViewById(R.id.bt_upload);
-        ivPreview = findViewById(R.id.iv_preview);
-        tvFile = findViewById(R.id.tv_select_file);
-
-        //버튼 클릭 이벤트
-        // image/*, video/*, audio/*, application/*
-        btChoose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //이미지를 선택
-                new AlertDialog.Builder(AddContentsActivity.this)
-                        .setTitle("파일 업로드")
-                        .setCancelable(false)
-                        // 하나씩 클릭해야하니깐 OnClickListener 가 여기에 들어옵니다.
-                        .setItems(R.array.uploadtype, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        String[] file = getResources().getStringArray(R.array.uploadtype);
-                                        uploadFileType(file[i]);
-                                    }
-                                }
-                        )
-                        .setNegativeButton("취소", null)
-                        .show();
-
-            }
-        });
-
-        btUpload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //업로드
-                uploadFile();
-            }
-        });
 
     }
 
+    View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()) {
+                case R.id.btn_content_upload:
+                    uploadFile();
+                    UserUpdateConnect();
+                    break;
+                case R.id.btn_file_upload:
+                    new AlertDialog.Builder(ContentUploadActivity.this)
+                            .setTitle("파일 업로드")
+                            .setCancelable(false)
+                            // 하나씩 클릭해야하니깐 OnClickListener 가 여기에 들어옵니다.
+                            .setItems(R.array.uploadtype, new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            String[] file = getResources().getStringArray(R.array.uploadtype);
+                                            uploadFileType(file[i]);
+                                        }
+                                    }
+                            )
+                            .setNegativeButton("취소", null)
+                            .show();
+                    break;
+
+            }
+        }
+    };
 
     private void uploadFileType(String type) {
         Intent intent = new Intent();
-
         switch (type) {
             case "이미지":
                 intent.setType("image/*");
@@ -130,9 +119,7 @@ public class AddContentsActivity extends Activity {
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 break;
         }
-
         startActivityForResult(Intent.createChooser(intent, "업로드할 파일을 선택하세요."), 0);
-
     }
 
     //결과 처리
@@ -142,15 +129,10 @@ public class AddContentsActivity extends Activity {
         //request코드가 0이고 OK를 선택했고 data에 뭔가가 들어 있다면
         if (requestCode == 0 && resultCode == RESULT_OK) {
             filePath = data.getData();
-            // 파일 타입
-            Log.v(TAG, getContentResolver().getType(filePath));
-            // 파일 주소
-            Log.d(TAG, "uri:" + String.valueOf(filePath));
             try {
                 //Uri 파일을 Bitmap으로 만들어서 ImageView에 집어 넣는다.
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
-                ivPreview.setImageBitmap(bitmap);
-                tvFile.setText(getFileName());
+                tv_filename.setText(getFileName());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -182,10 +164,8 @@ public class AddContentsActivity extends Activity {
         return filename;
     }
 
-
     //upload the file
     private void uploadFile() {
-
         //업로드할 파일이 있으면 수행
         if (filePath != null) {
             //업로드 진행 Dialog 보이기
@@ -196,11 +176,7 @@ public class AddContentsActivity extends Activity {
             //storage
             FirebaseStorage storage = FirebaseStorage.getInstance();
 
-            // *********
-            //storage 주소 변경 해줘야 함
-            StorageReference storageRef = storage.getReferenceFromUrl("gs://gambas-174df.appspot.com").child("uImage/" + filename);
-            Log.v(TAG, String.valueOf(storageRef));
-            //올라가거라...
+            StorageReference storageRef = storage.getReferenceFromUrl("gs://gambas-174df.appspot.com").child("contentsFolder/" + filename);
             storageRef.putFile(filePath)
                     //성공시
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -222,7 +198,7 @@ public class AddContentsActivity extends Activity {
                     .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            @SuppressWarnings("VisibleForTests") //이걸 넣어 줘야 아랫줄에 에러가 사라진다
+                            @SuppressWarnings("VisibleForTests")
                                     double progress = (100 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
                             //dialog에 진행률을 퍼센트로 출력해 준다
                             progressDialog.setMessage("Uploaded " + ((int) progress) + "%...");
@@ -230,6 +206,24 @@ public class AddContentsActivity extends Activity {
                     });
         } else {
             Toast.makeText(getApplicationContext(), "파일을 선택하세요.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void UserUpdateConnect() {
+        urlAddr = "http://" + centIP + ":8080/gambas/MyContentsInsert.jsp";
+        urlAddr += "?contentsTitle=" + et_content_title.getText().toString() + "&contentsContent=" + et_content_context.getText().toString()
+                + "&contentsFile=" + filename
+                + "&productSeqno=" + prdSeqno;
+
+        Log.v("URL", urlAddr);
+        try {
+            UserUpdateTask networkTask = new UserUpdateTask(ContentUploadActivity.this, urlAddr);
+            networkTask.execute().get();
+            Toast.makeText(ContentUploadActivity.this, "콘텐츠가 등록되었습니다.", Toast.LENGTH_SHORT).show();
+            finish();
+
+        } catch (Exception e) {
+
         }
     }
 }

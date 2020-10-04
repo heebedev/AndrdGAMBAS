@@ -20,6 +20,7 @@ import com.pjt.andrdgambas.FIREBASE.AddContentsActivity;
 
 import com.pjt.andrdgambas.HOME.HomeData;
 import com.pjt.andrdgambas.HOME.MainActivity;
+import com.pjt.andrdgambas.MYCHANNEL.ContentListActivity;
 import com.pjt.andrdgambas.R;
 
 import java.security.MessageDigest;
@@ -83,6 +84,10 @@ public class LoginActivity extends AppCompatActivity {
         tv_signUp.setOnClickListener(onClickListener);
         tv_findIdPw.setOnClickListener(onClickListener);
 
+
+        Button go_content = findViewById(R.id.go_content);
+        go_content.setOnClickListener(onClickListener);
+
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -111,6 +116,10 @@ public class LoginActivity extends AppCompatActivity {
                     break;
                 case R.id.tv_findIdPw:
                     intent = new Intent(LoginActivity.this, FindIdPwActivity.class);
+                    break;
+                case R.id.go_content:
+                    intent = new Intent(LoginActivity.this, ContentListActivity.class);
+                    startActivity(intent);
 
             }
         }
