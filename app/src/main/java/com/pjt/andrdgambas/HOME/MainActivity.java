@@ -15,11 +15,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
+import com.pjt.andrdgambas.MYINFO.Fragment_fourth;
+import com.pjt.andrdgambas.SUBSCRIBE.Fragment_Subscribe;
 import com.pjt.andrdgambas.Adapter_MainViewPager;
-import com.pjt.andrdgambas.Fragment_fourth;
 import com.pjt.andrdgambas.NOTICE.Fragment_notice;
 import com.pjt.andrdgambas.R;
-import com.pjt.andrdgambas.SUBSCRIBE.Fragment_Subscribe;
 
 public class MainActivity extends AppCompatActivity {
 

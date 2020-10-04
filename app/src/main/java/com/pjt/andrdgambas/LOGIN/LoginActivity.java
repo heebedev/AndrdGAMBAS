@@ -16,6 +16,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import com.kakao.auth.Session;
 import com.kakao.util.helper.Utility;
+import com.pjt.andrdgambas.FIREBASE.AddContentsActivity;
+
 import com.pjt.andrdgambas.HOME.HomeData;
 import com.pjt.andrdgambas.HOME.MainActivity;
 import com.pjt.andrdgambas.R;
@@ -78,6 +80,11 @@ public class LoginActivity extends AppCompatActivity {
 
         btn_login.setOnClickListener(onClickListener);
         tv_signUp.setOnClickListener(onClickListener);
+
+
+        // 수빈 테스트용 추가
+        Button btn_firebase = findViewById(R.id.btn_firebase);
+        btn_firebase.setOnClickListener(onClickListener);
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -100,6 +107,11 @@ public class LoginActivity extends AppCompatActivity {
                     break;
                 case R.id.btn_kakao_login:
                     btn_kakao_login.performClick();
+                    break;
+
+                case R.id.btn_firebase:
+                    intent = new Intent(LoginActivity.this, AddContentsActivity.class);
+                    startActivity(intent);
                     break;
             }
         }

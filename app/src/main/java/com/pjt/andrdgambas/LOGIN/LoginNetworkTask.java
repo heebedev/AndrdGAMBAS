@@ -100,6 +100,7 @@ public class LoginNetworkTask extends AsyncTask<Integer, String , Object> {
             JSONObject jsonObject = new JSONObject(s);
             returnpwd = jsonObject.getString("uPassword"); // 디비에서 패스워드 받아옴
             HomeData.USERID = jsonObject.getString("uSeqno");
+
             STATICDATA.USEQNO = jsonObject.getString("uSeqno");
             STATICDATA.UNAME = jsonObject.getString("uName");
             STATICDATA.UEMAIL = jsonObject.getString("uEmail");
