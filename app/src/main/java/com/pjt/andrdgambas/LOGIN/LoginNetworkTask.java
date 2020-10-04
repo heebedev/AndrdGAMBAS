@@ -68,7 +68,7 @@ public class LoginNetworkTask extends AsyncTask<Integer, String , Object> {
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setConnectTimeout(10000);
 
-            if (httpURLConnection.getResponseCode() == HttpURLConnection.HTTP_OK){
+            if (httpURLConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 inputStream = httpURLConnection.getInputStream(); // 데이터 가져오기
                 inputStreamReader = new InputStreamReader(inputStream); // 가져온 데이터를 리더에 넣기
                 bufferedReader = new BufferedReader(inputStreamReader); // 버퍼드리더에 넣기
@@ -100,7 +100,6 @@ public class LoginNetworkTask extends AsyncTask<Integer, String , Object> {
             JSONObject jsonObject = new JSONObject(s);
             returnpwd = jsonObject.getString("uPassword"); // 디비에서 패스워드 받아옴
             HomeData.USERID = jsonObject.getString("uSeqno");
-
             STATICDATA.USEQNO = jsonObject.getString("uSeqno");
             STATICDATA.UNAME = jsonObject.getString("uName");
             STATICDATA.UEMAIL = jsonObject.getString("uEmail");
