@@ -1,6 +1,7 @@
 package com.pjt.andrdgambas.HOME;
 
 import android.content.Context;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.pjt.andrdgambas.R;
 
 import java.util.ArrayList;
@@ -17,6 +23,7 @@ import java.util.ArrayList;
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
     private Context context;
     private ArrayList<HomeData> mData = new ArrayList<>();
+    public String fileName = "test.png";
 
     // 생성자에서 데이터 리스트 객체를 전달받음.
     HomeAdapter(Context context, ArrayList<HomeData> list) {
@@ -72,6 +79,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
             subs = (TextView)itemView.findViewById(R.id.tv_subs);
 
 
+
         }
     }
 
@@ -88,7 +96,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
 
     // onBindViewHolder() - position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시.
     @Override
-    public void onBindViewHolder(HomeAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final HomeAdapter.ViewHolder holder, int position) {
         String title = mData.get(position).getTitle();
         String nickname =mData.get(position).getNickname();
         String price = mData.get(position).getPrice();
@@ -108,6 +116,19 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
         holder.term.setText(term);
         holder.liked.setText(liked);
         holder.subs.setText("구독 " + subs);
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference();
+        StorageReference dateRef = storageRef.child("uImage/" + fileName); // fileName은 테스트용!!! image로 넣어야함.
+        dateRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Log.v("Firebase URL", uri.toString());
+                Glide.with(context)
+                        .load(uri.toString())
+                        .apply(new RequestOptions().centerCrop())
+                        .into(holder.imageView);
+            }
+        });
     }
 
     // getItemCount() - 전체 데이터 갯수 리턴.
