@@ -1,5 +1,6 @@
 package com.pjt.andrdgambas.SUBSCRIBE;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +17,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.pjt.andrdgambas.HOME.HomeData;
 import com.pjt.andrdgambas.R;
 import com.pjt.andrdgambas.STATICDATA;
@@ -136,7 +140,21 @@ public class Activity_Subscribe_Contents_Detail extends AppCompatActivity {
             countlikecontents_tv.setText( contentsDetails.get(0).getCountlikecontents());
             context_tv.setText( contentsDetails.get(0).getCtContext());
 
-            webView.loadUrl("http://" + STATICDATA.CENTIP + ":8080/ftp/"+contentsDetails.get(0).getCtfile()); // 웹
+            // Firebase WebView
+            //webView.loadUrl("http://" + STATICDATA.CENTIP + ":8080/ftp/"+contentsDetails.get(0).getCtfile()); // 웹
+            String fileName = contentsDetails.get(0).getCtfile();
+
+            StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+            StorageReference dateRef = storageRef.child("contentsFolder/"+fileName);
+            dateRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>()
+            {
+                @Override
+                public void onSuccess(Uri downloadUrl)
+                {
+                    webView.loadUrl(downloadUrl.toString());
+                }
+            });
+
 
             // 내가 좋아요했는지 확인하고 이미지 숨기기 0 = unlike 보이기, 1 = liked 보이기
             if( contentsDetails.get(0).getCheckmylikecontents().equals("0")) {
