@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="uploadtype">
+        <item>이미지</item>
+        <item>동영상</item>
+        <item>음악</item>
+        <item>파일</item>
+    </string-array>
+</resources>

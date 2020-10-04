@@ -1,7 +1,6 @@
 package com.pjt.andrdgambas.MYINFO;
 
 import android.content.Intent;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,19 +10,19 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.fragment.app.Fragment;
-
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.pjt.andrdgambas.HOME.HomeData;
 import com.pjt.andrdgambas.R;
-
 import java.util.ArrayList;
 
-public class Fragment_fourth extends Fragment {
+public class Fragment_myinfo extends Fragment {
+
+
     Intent intent;
     Button btn_update_myinfo;
     String urlAddr, imageName;
@@ -37,6 +36,7 @@ public class Fragment_fourth extends Fragment {
         tv_name = view.findViewById(R.id.tv_get_user_name);
         btn_update_myinfo = view.findViewById(R.id.btn_update_myinfo);
         btn_update_myinfo.setOnClickListener(onClickListener);
+        imageView = view.findViewById(R.id.img_user);
 
         urlAddr = "http://" + centIP + ":8080/gambas/getUserInfo2_android.jsp";
         connectGetData();
@@ -65,18 +65,20 @@ public class Fragment_fourth extends Fragment {
             tv_name.setText(myinfo[0]);
             imageName = myinfo[1];
 
-            StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-            StorageReference dateRef = storageRef.child("gambasFile/"+imageName);
+
+            FirebaseStorage storage = FirebaseStorage.getInstance();
+            StorageReference storageRef = storage.getReference();
+            StorageReference dateRef = storageRef.child("uImage/"+imageName);
             dateRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
                             Log.v("Firebase URL", uri.toString());
-                            Glide.with(getActivity()).load(uri.toString()).into(imageView);
+                            Glide.with(getActivity())
+                                    .load(uri.toString())
+                                    .apply(new RequestOptions().centerCrop())
+                                    .into(imageView);
                         }
-                    }).toString();
-
-
-
+                    });
 
         } catch (Exception e) {
 
