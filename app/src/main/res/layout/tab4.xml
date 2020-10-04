@@ -17,13 +17,13 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="0px"
-            android:layout_weight="1">
+            android:layout_weight="2">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/img_user"
                 android:layout_width="0px"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="0.5"
                 android:layout_gravity="left"
                 android:src="@drawable/logo"/>
 
@@ -32,8 +32,10 @@
                 android:layout_width="0px"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:text="SAMPLE NAME"
                 android:textColor="#000000"
-                android:textSize="14dp"
+                android:textSize="20dp"
                 android:layout_gravity="center"
                 android:textStyle="bold"/>
 
@@ -41,8 +43,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0px"
-                android:layout_weight="1"
+                android:layout_height="36dp"
                 android:orientation="horizontal">
 
                 <Button
@@ -58,11 +59,11 @@
                 <Button
                     android:id="@+id/btn_update_myinfo"
                     android:layout_width="0px"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#05ffffff"
                     android:text="내 정보 수정"
-                    android:gravity="right"
+                    android:gravity="right|center"
                     android:textColor="#c19fc2"
                     android:textSize="14dp"/>
 
@@ -77,6 +78,7 @@
                 android:text="내 좋아요"
                 android:textColor="#000000"
                 android:textSize="14dp"
+                android:layout_marginBottom="3dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <ListView
@@ -97,6 +99,7 @@
                 android:text="내 리뷰"
                 android:textColor="#000000"
                 android:textSize="14dp"
+                android:layout_marginBottom="3dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <ListView

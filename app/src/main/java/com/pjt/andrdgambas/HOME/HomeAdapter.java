@@ -1,6 +1,8 @@
 package com.pjt.andrdgambas.HOME;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,7 +17,10 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.pjt.andrdgambas.PRDDETAIL.PrdDetailActivity;
 import com.pjt.andrdgambas.R;
+import com.pjt.andrdgambas.STATICDATA;
+import com.pjt.andrdgambas.SUBSCRIBE.Activity_Subscribe_ContentsList;
 
 import java.util.ArrayList;
 
@@ -50,24 +55,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
         public ViewHolder(View itemView) {
             super(itemView) ;
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int position = getAdapterPosition();
-                    if (position!= RecyclerView.NO_POSITION){
-                        Log.v("onClick",Integer.toString(position));
-                        Log.v("onClick", String.valueOf(mListener));
-                        if (mListener != null) {
-                            Log.v("onClick", String.valueOf(mListener));
-                            HomeData item = mData.get(position);
-                            Log.v("onClick",mData.toString());
-                            mListener.onItemClickListener1(v, position);
-                        }
-                    }
-                }
-
-            });
-
             // 뷰 객체에 대한 참조. (hold strong reference)
             title = (TextView)itemView.findViewById(R.id.tv_title) ;
             nickname = (TextView)itemView.findViewById(R.id.tv_nickname);
@@ -78,12 +65,22 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
             liked = (TextView)itemView.findViewById(R.id.tv_liked);
             subs = (TextView)itemView.findViewById(R.id.tv_subs);
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int pos = getAdapterPosition();
 
+                    STATICDATA.PRD_SEQNO = mData.get(pos).getPrdSeq();
+                    STATICDATA.SUBS_SEQNO = mData.get(pos).getSubs();
+                    Log.e("PrdSeqno", String.valueOf(STATICDATA.PRD_SEQNO));
+
+                    Intent intent = new Intent(view.getContext(), PrdDetailActivity.class);
+                    view.getContext().startActivity(intent);
+                }
+            });
 
         }
     }
-
-
 
     // onCreateViewHolder() - 아이템 뷰를 위한 뷰홀더 객체 생성하여 리턴.
     @Override
@@ -104,6 +101,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
         String term = mData.get(position).getTerm();
         String liked = mData.get(position).getLike();
         String subs = mData.get(position).getSubs();
+
         if(subs.equals("null")){
             subs = "0";
         }
@@ -115,10 +113,11 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
         holder.day.setText(day);
         holder.term.setText(term);
         holder.liked.setText(liked);
-        holder.subs.setText("구독 " + subs);
+        holder.subs.setText(subs);
+
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
-        StorageReference dateRef = storageRef.child("uImage/" + fileName); // fileName은 테스트용!!! image로 넣어야함.
+        StorageReference dateRef = storageRef.child("prdImage/" + image); // fileName은 테스트용!!! image로 넣어야함.
         dateRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
@@ -126,9 +125,15 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
                 Glide.with(context)
                         .load(uri.toString())
                         .apply(new RequestOptions().centerCrop())
+                        .placeholder(R.drawable.gambaslogo)
                         .into(holder.imageView);
             }
         });
+
+
+
+
+
     }
 
     // getItemCount() - 전체 데이터 갯수 리턴.

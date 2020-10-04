@@ -17,7 +17,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.pjt.andrdgambas.MYINFO.Fragment_myinfo;
 import com.pjt.andrdgambas.SUBSCRIBE.Fragment_Subscribe;
-import com.pjt.andrdgambas.Adapter_MainViewPager;
+import com.pjt.andrdgambas.Adapter_ViewPager;
 import com.pjt.andrdgambas.NOTICE.Fragment_notice;
 import com.pjt.andrdgambas.R;
 
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout nav_draw;
     NavigationView nav_view;
     View header;
-    Adapter_MainViewPager adapter;
+    Adapter_ViewPager adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setViewPager() {
-        adapter = new Adapter_MainViewPager(getSupportFragmentManager());
+        adapter = new Adapter_ViewPager(getSupportFragmentManager());
         adapter.addFragment(new Fragment_home(), "HOME");
         adapter.addFragment(new Fragment_notice(), "NOTICE");
         adapter.addFragment(new Fragment_Subscribe(), "SUBSCRIBE");

@@ -29,12 +29,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.kakao.usermgmt.UserManagement;
-import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.pjt.andrdgambas.HOME.HomeData;
 import com.pjt.andrdgambas.R;
-import com.pjt.andrdgambas.SJ_InsNetworkTask;
-import com.pjt.andrdgambas.SJ_IntNetworkTask;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;

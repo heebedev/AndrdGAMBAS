@@ -194,22 +194,6 @@ public class Fragment_home extends Fragment {
         adapter = new HomeAdapter(getActivity(), list);
 
 
-        btn_logout = view.findViewById(R.id.btn_logout);
-
-        btn_logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                UserManagement.getInstance().requestLogout(new LogoutResponseCallback() {
-                    @Override
-                    public void onCompleteLogout() {
-                        intent = new Intent(getActivity(), LoginActivity.class);
-                        startActivity(intent);
-                    }
-                });
-            }
-        });
-
-
         Log.v("SSB", STATICDATA.UCreaterSubs);
 
 

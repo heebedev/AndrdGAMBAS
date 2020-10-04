@@ -18,10 +18,12 @@
         android:theme="@style/GAMBASTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".MYINFO.ChangePasswordActivity" />
+        <activity android:name=".PRDDETAIL.PrdDetailActivity" />
+        <activity android:name=".PRDDETAIL.NewReviewActivity" />
         <activity android:name=".MYINFO.UpdateMyInfoActivity" />
         <activity android:name=".FIREBASE.TestContentsActivity" />
         <activity android:name=".FIREBASE.AddContentsActivity" />
-        <activity android:name=".LOGIN.FindIdPwActivity"></activity>
+        <activity android:name=".LOGIN.FindIdPwActivity"/>
         <activity android:name=".MYCHANNEL.Activity_Mychannel" />
         <activity android:name=".LOGIN.SignUpActivity" />
         <meta-data
@@ -37,7 +39,7 @@
         </activity>
         <activity android:name=".SUBSCRIBE.Activity_Subscribe_ContentsList" />
         <activity android:name=".SUBSCRIBE.Activity_Subscribe_Contents_Detail" />
-        <activity android:name=".HOME.MainActivity"></activity>
+        <activity android:name=".HOME.MainActivity"/>
     </application>
 
 </manifest>
