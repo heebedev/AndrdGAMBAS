@@ -1,12 +1,14 @@
-package com.pjt.andrdgambas;
+package com.pjt.andrdgambas.LOGIN;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import org.json.JSONObject;
+import com.pjt.andrdgambas.HOME.HomeData;
+import com.pjt.andrdgambas.STATICDATA;
 
+import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -14,11 +16,11 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class LoginNetworkTask extends AsyncTask<Integer, String , Object> {
+
     Context context;
     String mAddr;
     ProgressDialog progressDialog;
     String returnpwd;
-    String uSeqno;
 
     public LoginNetworkTask(Context context, String mAddr) {
         this.context = context;
@@ -62,6 +64,7 @@ public class LoginNetworkTask extends AsyncTask<Integer, String , Object> {
 
         try {
             URL url = new URL(mAddr);
+            Log.e("Status", String.valueOf(url));
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setConnectTimeout(10000);
 
@@ -91,13 +94,23 @@ public class LoginNetworkTask extends AsyncTask<Integer, String , Object> {
 
         return returnpwd; // 패스워드 리턴시키고 엑티비티에서 받음
     }
+
     private void Parser(String s){
         try {
             JSONObject jsonObject = new JSONObject(s);
             returnpwd = jsonObject.getString("uPassword"); // 디비에서 패스워드 받아옴
             HomeData.USERID = jsonObject.getString("uSeqno");
-//            Log.v("디비 패스워드",returnpwd);
-//            Log.v("HomeData.USERID",HomeData.USERID);
+
+            STATICDATA.USEQNO = jsonObject.getString("uSeqno");
+            STATICDATA.UNAME = jsonObject.getString("uName");
+            STATICDATA.UEMAIL = jsonObject.getString("uEmail");
+            STATICDATA.UCreaterSubs = jsonObject.getString("uCreaterSubs");
+            Log.v("디비 패스워드",returnpwd);
+            Log.e("LoginNtwTask", STATICDATA.USEQNO);
+            Log.e("LoginNtwTask", STATICDATA.UNAME);
+            Log.e("LoginNtwTask", STATICDATA.UEMAIL);
+            Log.e("LoginNtwTask", STATICDATA.UCreaterSubs);
+
         }catch (Exception e){
             e.printStackTrace();
         }

@@ -1,4 +1,4 @@
-package com.pjt.andrdgambas;
+package com.pjt.andrdgambas.LOGIN;
 
 import android.app.Application;
 import android.content.Context;

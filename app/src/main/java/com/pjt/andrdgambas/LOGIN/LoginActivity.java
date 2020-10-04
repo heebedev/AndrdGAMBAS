@@ -1,4 +1,4 @@
-package com.pjt.andrdgambas;
+package com.pjt.andrdgambas.LOGIN;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -15,24 +15,29 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
-
-import com.kakao.auth.AuthType;
 import com.kakao.auth.Session;
-import com.kakao.usermgmt.UserManagement;
-import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.kakao.util.helper.Utility;
 import com.pjt.andrdgambas.FIREBASE.AddContentsActivity;
 
-import java.net.URL;
+import com.pjt.andrdgambas.HOME.HomeData;
+import com.pjt.andrdgambas.HOME.MainActivity;
+import com.pjt.andrdgambas.R;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class LoginActivity extends AppCompatActivity {
 
-    Button btn_email;
-    TextView tv_signUp;
+    Button btn_login;
+    EditText et_email, et_pw;
+    TextView tv_signUp, tv_dialog;
     Intent intent;
+    String centIP = HomeData.CENIP;
+    String returnpwd = "";
+
+    String email, pw, uSeqno, urlAddr;
 
     //카카오로그인
     com.kakao.usermgmt.LoginButton btn_kakao_login;
@@ -60,9 +65,12 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Log.v("Tag",getKeyHash(LoginActivity.this));
-        btn_email = findViewById(R.id.btn_email);
+        btn_login = findViewById(R.id.btn_login);
         tv_signUp = findViewById(R.id.tv_signUp);
         btn_kakao_login = findViewById(R.id.btn_kakao_login);
+        et_email = findViewById(R.id.et_login_loginID);
+        et_pw = findViewById(R.id.et_login_loginPW);
+        tv_dialog = findViewById(R.id.tv_login_loginDialog);
 
         //카카오 로그인 콜백 초기화
         kakaoLogin = new SessionCallback(getApplicationContext());
@@ -70,10 +78,10 @@ public class LoginActivity extends AppCompatActivity {
 
         //앱 실행 시 로그인 토큰이 있으면 자동으로 로그인 수행
 
-        session = Session.getCurrentSession();
-        session.checkAndImplicitOpen();
+//        session = Session.getCurrentSession();
+//        session.checkAndImplicitOpen();
 
-        btn_email.setOnClickListener(onClickListener);
+        btn_login.setOnClickListener(onClickListener);
         tv_signUp.setOnClickListener(onClickListener);
 
 
@@ -87,9 +95,19 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             switch (view.getId()) {
-                case R.id.btn_email:
-                    intent = new Intent(LoginActivity.this, EmailLoginActivity.class);
-                    startActivity(intent);
+                case R.id.btn_login:
+                    email = et_email.getText().toString().trim();
+                    pw = et_pw.getText().toString().trim();
+                    if (email.length() == 0 || pw.length() == 0) {
+                        tv_dialog.setText("이메일 또는 비밀번호를 확인해주세요.");
+                        tv_dialog.setVisibility(View.VISIBLE);
+                    }else{
+                        urlAddr = "";
+                        urlAddr = "http://" + centIP + ":8080/gambas/GAMBAS_emailLogin.jsp?"; // centIP 는 항상 위에
+                        urlAddr = urlAddr + "uEmail=" + email;
+                        Log.v("URL",urlAddr);
+                        connectionloginData();
+                    }
                     break;
                 case R.id.btn_kakao_login:
                     btn_kakao_login.performClick();
@@ -119,6 +137,32 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void connectionloginData() {
+
+        try {
+            LoginNetworkTask loginNetworkTask = new LoginNetworkTask(LoginActivity.this, urlAddr);
+            returnpwd = loginNetworkTask.execute().get().toString();
+
+            Log.v("패스워드",returnpwd);
+            if (returnpwd.equals("null")){ // 디비에서 가져온 패스워드값이 null 이면 이메일이 없어요
+                tv_dialog.setText("이메일을 확인해주세요.");
+
+            }else if(returnpwd.equals(pw)){ // 디비에서 가져온 비밀번호랑 입력한 비밀번호가 동일하면 로그인성공
+                // 로그인 성공
+                intent = new Intent(LoginActivity.this, MainActivity.class);
+                intent.putExtra("uSeqno", HomeData.USERID);
+                startActivity(intent);
+            }
+            else { // 이메일과 비밀번호가 디비에 저장되어 있는거랑 다름
+                tv_dialog.setText("비밀번호를 확인해주세요.");
+
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 

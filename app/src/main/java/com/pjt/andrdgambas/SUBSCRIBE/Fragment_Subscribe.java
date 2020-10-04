@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.pjt.andrdgambas.HOME.HomeData;
 import com.pjt.andrdgambas.R;
 import com.pjt.andrdgambas.STATICDATA;
 
@@ -54,10 +55,10 @@ public class Fragment_Subscribe extends Fragment {
     //구독게시물 리스트  가져오기
     public void ConnectGetSubslist(){
         urlAddrSelectSubslist = "http://" + centIP + ":8080/gambas/subsListQuery.jsp?";
-        urlAddrSelectSubslist = urlAddrSelectSubslist + "uSeqno=" + STATICDATA.USEQNO; //  uSeqno 넘겨줌
+        urlAddrSelectSubslist = urlAddrSelectSubslist + "uSeqno=" + HomeData.USERID; //  uSeqno 넘겨줌
 
         try{
-            //Log.v("url subslist; ",urlAddrSelectSubslist);
+            Log.v("url subslist; ",urlAddrSelectSubslist);
             NetworkTask_Subscribe_Subslist_Select subslistNetworkTask
                     = new NetworkTask_Subscribe_Subslist_Select( getActivity(), urlAddrSelectSubslist );
             Object obj = subslistNetworkTask.execute( ).get( );

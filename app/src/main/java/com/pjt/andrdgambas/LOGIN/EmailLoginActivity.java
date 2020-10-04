@@ -1,4 +1,4 @@
-package com.pjt.andrdgambas;
+package com.pjt.andrdgambas.LOGIN;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,8 +13,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.Map;
-import java.util.Set;
+import com.pjt.andrdgambas.HOME.HomeData;
+import com.pjt.andrdgambas.HOME.MainActivity;
+import com.pjt.andrdgambas.R;
 
 public class EmailLoginActivity extends AppCompatActivity {
 
@@ -68,7 +69,6 @@ public class EmailLoginActivity extends AppCompatActivity {
         try {
             LoginNetworkTask loginNetworkTask = new LoginNetworkTask(EmailLoginActivity.this, urlAddr);
             returnpwd = loginNetworkTask.execute().get().toString();
-            //uSeqno = loginNetworkTask.execute().get().toString();
 
             if (returnpwd.equals("null")){ // 디비에서 가져온 패스워드값이 null 이면 이메일이 없어요
                 tv_dialog2.setText("이메일을 확인해주세요.");
@@ -84,6 +84,7 @@ public class EmailLoginActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) { // 확인누르면 로그인한 이메일들고 메인페이지로(아직안만들어서 첫페이지)
                                 intent = new Intent(EmailLoginActivity.this, MainActivity.class);
+                                intent.putExtra("uSeqno", HomeData.USERID);
                                 startActivity(intent);
                             }
                         })

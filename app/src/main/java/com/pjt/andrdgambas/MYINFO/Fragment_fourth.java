@@ -18,7 +18,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.pjt.andrdgambas.HomeData;
+import com.pjt.andrdgambas.HOME.HomeData;
 import com.pjt.andrdgambas.R;
 
 import java.util.ArrayList;

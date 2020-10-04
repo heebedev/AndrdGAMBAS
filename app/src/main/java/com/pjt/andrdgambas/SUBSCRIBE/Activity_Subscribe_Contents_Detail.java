@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.pjt.andrdgambas.HOME.HomeData;
 import com.pjt.andrdgambas.R;
 import com.pjt.andrdgambas.STATICDATA;
 
@@ -122,7 +123,7 @@ public class Activity_Subscribe_Contents_Detail extends AppCompatActivity {
     // 콘텐츠 디테일 불러오기
     private void ConnectGetContentsDetails() {
         urlAddrDetailsContents = "http://" + STATICDATA.CENTIP + ":8080/gambas/contentsViewQuery.jsp?";
-        urlAddrDetailsContents = urlAddrDetailsContents + "ctSeqno=" + STATICDATA.CT_SEQNO + "&uSeqno=" + STATICDATA.USEQNO ; //  ctSeqno, uSeqno 넘겨줌
+        urlAddrDetailsContents = urlAddrDetailsContents + "ctSeqno=" + STATICDATA.CT_SEQNO + "&uSeqno=" + HomeData.USERID ; //  ctSeqno, uSeqno 넘겨줌
         Log.v("contentsDetails", "콘텐츠리스트 url" +urlAddrDetailsContents);
 
         try{
@@ -170,7 +171,7 @@ public class Activity_Subscribe_Contents_Detail extends AppCompatActivity {
                     like_iv.setVisibility(view.VISIBLE);
 
                     // 좋아요 Insert
-                    String uSeqno = STATICDATA.USEQNO;
+                    String uSeqno = HomeData.USERID;
                     String ctSeqno = contentsDetails.get(0).getCtSeqno();
                     String prdSeqno = contentsDetails.get(0).getPrdSeqno();
 
@@ -200,7 +201,7 @@ public class Activity_Subscribe_Contents_Detail extends AppCompatActivity {
                     like_iv.setVisibility(view.INVISIBLE);
 
                     // 좋아요 Update
-                    uSeqno = STATICDATA.USEQNO;
+                    uSeqno = HomeData.USERID;
                     ctSeqno = contentsDetails.get(0).getCtSeqno();
 
                     urlAddrUpdateLike = "";
@@ -223,7 +224,7 @@ public class Activity_Subscribe_Contents_Detail extends AppCompatActivity {
                     break;
 
                 case R.id.btn_contents_insert_comment:
-                    uSeqno = STATICDATA.USEQNO;
+                    uSeqno = HomeData.USERID;
                     ctSeqno = contentsDetails.get(0).getCtSeqno();
                     String cmcontext = input_comment_et.getText().toString().trim();
 

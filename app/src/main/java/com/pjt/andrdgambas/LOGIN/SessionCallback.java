@@ -1,11 +1,8 @@
-package com.pjt.andrdgambas;
+package com.pjt.andrdgambas.LOGIN;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
-
-import androidx.appcompat.app.AlertDialog;
 
 import com.kakao.auth.ISessionCallback;
 import com.kakao.network.ErrorResult;
@@ -17,6 +14,10 @@ import com.kakao.usermgmt.response.model.Profile;
 import com.kakao.usermgmt.response.model.UserAccount;
 import com.kakao.util.OptionalBoolean;
 import com.kakao.util.exception.KakaoException;
+import com.pjt.andrdgambas.HOME.HomeData;
+import com.pjt.andrdgambas.HOME.MainActivity;
+import com.pjt.andrdgambas.LOGIN.LoginNetworkTask;
+import com.pjt.andrdgambas.LOGIN.SignUpActivity;
 
 public class SessionCallback {
 
@@ -69,7 +70,7 @@ public class SessionCallback {
                                     Log.i("KAKAO_API", "email: " + uEmail);
                                     if (uEmail == "null" || uEmail == null) {
                                     } else {
-                                        urlAddr = "http://" + centIP + ":8080/test/GAMBAS_emailLogin.jsp?"; // centIP 는 항상 위에
+                                        urlAddr = "http://" + centIP + ":8080/gambas/GAMBAS_emailLogin.jsp?"; // centIP 는 항상 위에
                                         urlAddr = urlAddr + "uEmail=" + uEmail;
                                         Log.v("URL", urlAddr);
                                         connectionloginData(urlAddr);
@@ -114,6 +115,7 @@ public class SessionCallback {
             }else { // uSeqno 값이 있으면 기존에 회원가입 했던 회원
                 intent = new Intent(mContext, MainActivity.class);
                 intent.putExtra("uSeqno", uSeqno);
+                HomeData.USERID = uSeqno;
                 mContext.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             }
         }catch (Exception e){
