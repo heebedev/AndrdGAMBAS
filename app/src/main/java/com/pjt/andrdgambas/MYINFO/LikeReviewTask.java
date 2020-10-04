@@ -1,39 +1,41 @@
-package com.pjt.andrdgambas.LOGIN;
+package com.pjt.andrdgambas.MYINFO;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.pjt.andrdgambas.HOME.HomeData;
-import com.pjt.andrdgambas.STATICDATA;
-
+import org.json.JSONArray;
 import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
-public class LoginNetworkTask extends AsyncTask<Integer, String , Object> {
+public class LikeReviewTask extends AsyncTask<Integer, String, Object> {
 
     Context context;
     String mAddr;
     ProgressDialog progressDialog;
-    String returnpwd;
+    ArrayList<MyLikeReview> members;
 
-    public LoginNetworkTask(Context context, String mAddr) {
+    public LikeReviewTask(Context context, String mAddr) {
         this.context = context;
         this.mAddr = mAddr;
+        this.members = new ArrayList<MyLikeReview>();
     }
 
     @Override
     protected void onPreExecute() {
-//        progressDialog = new ProgressDialog(context);
-//        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//        progressDialog.setTitle("Dialog");
-//        progressDialog.setMessage("Loading .....");
-//        progressDialog.show();
+        progressDialog = new ProgressDialog(context);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setTitle("Dialog");
+        progressDialog.setMessage("Get ....");
+        progressDialog.show();
+
     }
 
     @Override
@@ -41,11 +43,10 @@ public class LoginNetworkTask extends AsyncTask<Integer, String , Object> {
         super.onProgressUpdate(values);
     }
 
-
     @Override
     protected void onPostExecute(Object o) {
         super.onPostExecute(o);
-//        progressDialog.dismiss();
+        progressDialog.dismiss();
     }
 
     @Override
@@ -55,6 +56,7 @@ public class LoginNetworkTask extends AsyncTask<Integer, String , Object> {
 
     @Override
     protected Object doInBackground(Integer... integers) {
+
         StringBuffer stringBuffer = new StringBuffer();
         InputStream inputStream = null;
         InputStreamReader inputStreamReader = null;
@@ -62,50 +64,62 @@ public class LoginNetworkTask extends AsyncTask<Integer, String , Object> {
 
         try {
             URL url = new URL(mAddr);
-            Log.e("Status", String.valueOf(url));
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setConnectTimeout(10000);
 
             if (httpURLConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                inputStream = httpURLConnection.getInputStream(); // 데이터 가져오기
-                inputStreamReader = new InputStreamReader(inputStream); // 가져온 데이터를 리더에 넣기
-                bufferedReader = new BufferedReader(inputStreamReader); // 버퍼드리더에 넣기
+                inputStream = httpURLConnection.getInputStream();
+                inputStreamReader = new InputStreamReader(inputStream);
+                bufferedReader = new BufferedReader(inputStreamReader);
 
-                while (true){
+
+                while (true) {
                     String strline = bufferedReader.readLine();
-                    if (strline == null) break; // 브레이크 만나면 와일문 빠져나감
+                    if (strline == null) break;
                     stringBuffer.append(strline + "\n");
-                } // 와일문 끝나면 다 가져왔다
+                }
+
+                //json 파싱
                 Parser(stringBuffer.toString());
+
             }
-        }catch (Exception e){
+
+
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
                 if (bufferedReader != null) bufferedReader.close();
                 if (inputStreamReader != null) inputStreamReader.close();
                 if (inputStream != null) inputStream.close();
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
-        return returnpwd; // 패스워드 리턴시키고 엑티비티에서 받음
+        return members; //ArrayList를 반환
     }
 
-    private void Parser(String s){
+
+    private void Parser(String s) {
         try {
             JSONObject jsonObject = new JSONObject(s);
-            returnpwd = jsonObject.getString("uPassword"); // 디비에서 패스워드 받아옴
-            HomeData.USERID = jsonObject.getString("uSeqno");
-            STATICDATA.USEQNO = jsonObject.getString("uSeqno");
-            STATICDATA.UNAME = jsonObject.getString("uName");
-            STATICDATA.UEMAIL = jsonObject.getString("uEmail");
-            STATICDATA.UCreaterSubs = jsonObject.getString("uCreaterSubs");
+            JSONArray jsonArray = new JSONArray(jsonObject.getString("myInfo"));
+            members.clear();
 
-        }catch (Exception e){
-            e.printStackTrace();
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject1 = (JSONObject) jsonArray.get(i);
+                String title = jsonObject1.getString("title");
+                String subTitle = jsonObject1.getString("subTitle");
+
+                MyLikeReview member = new MyLikeReview(title, subTitle);
+                members.add(member);
+            }
+
+        } catch (Exception e) {
+
         }
     }
+
 
 }

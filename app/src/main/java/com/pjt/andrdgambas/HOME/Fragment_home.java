@@ -22,6 +22,7 @@ import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.pjt.andrdgambas.LOGIN.LoginActivity;
 import com.pjt.andrdgambas.R;
+import com.pjt.andrdgambas.STATICDATA;
 
 import java.util.ArrayList;
 
@@ -207,6 +208,11 @@ public class Fragment_home extends Fragment {
                 });
             }
         });
+
+
+        Log.v("SSB", STATICDATA.UCreaterSubs);
+
+
         return view;
     }
 

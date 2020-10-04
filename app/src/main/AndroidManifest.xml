@@ -17,16 +17,13 @@
         android:supportsRtl="true"
         android:theme="@style/GAMBASTheme"
         android:usesCleartextTraffic="true">
-
-        <activity android:name=".MYINFO.ChangePasswordActivity"/>
+        <activity android:name=".MYINFO.ChangePasswordActivity" />
         <activity android:name=".MYINFO.UpdateMyInfoActivity" />
         <activity android:name=".FIREBASE.TestContentsActivity" />
         <activity android:name=".FIREBASE.AddContentsActivity" />
-
-        <activity android:name=".MYCHANNEL.Activity_Mychannel"></activity>
         <activity android:name=".LOGIN.FindIdPwActivity"></activity>
+        <activity android:name=".MYCHANNEL.Activity_Mychannel" />
         <activity android:name=".LOGIN.SignUpActivity" />
-
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
@@ -38,11 +35,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".SUBSCRIBE.Activity_Subscribe_ContentsList"></activity>
-        <activity android:name=".SUBSCRIBE.Activity_Subscribe_Contents_Detail"></activity>
-        <activity android:name=".HOME.MainActivity">
-        </activity>
+        <activity android:name=".SUBSCRIBE.Activity_Subscribe_ContentsList" />
+        <activity android:name=".SUBSCRIBE.Activity_Subscribe_Contents_Detail" />
+        <activity android:name=".HOME.MainActivity"></activity>
     </application>
 
 </manifest>

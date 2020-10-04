@@ -8,20 +8,19 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.pjt.andrdgambas.HOME.HomeData;
 import com.pjt.andrdgambas.R;
+import com.pjt.andrdgambas.STATICDATA;
 
-import org.w3c.dom.Text;
 
 public class ChangePasswordActivity extends AppCompatActivity {
     EditText tv_pwd, tv_new_pwd, tv_new_pwd_check;
     Button btn_change_pwd;
     Intent intent;
     String password, urlAddr;
-    String centIP = HomeData.CENIP;
+    String centIP = STATICDATA.CENTIP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,17 +51,24 @@ public class ChangePasswordActivity extends AppCompatActivity {
         }
     };
 
+    private void endThisActivity() {
+        Intent intent = getIntent();
+        setResult(RESULT_OK, intent);
+        finish();
+
+    }
+
     private void emptyCheck() {
-        if(tv_pwd.length() == 0) {
-            Toast.makeText(ChangePasswordActivity.this,"기존 비밀번호를 입력해주세요..",Toast.LENGTH_SHORT).show();
-        } else if(tv_new_pwd.length() == 0) {
-            Toast.makeText(ChangePasswordActivity.this,"신규 비밀번호를 입력해주세요.",Toast.LENGTH_SHORT).show();
-        } else if(tv_new_pwd_check.length() == 0) {
-            Toast.makeText(ChangePasswordActivity.this,"신규 비밀번호 확인 입력해주세요.",Toast.LENGTH_SHORT).show();
-        } else if(!tv_pwd.getText().toString().equals(password)){
-            Toast.makeText(ChangePasswordActivity.this,"기존 비밀번호를 확인해주세요.",Toast.LENGTH_SHORT).show();
-        } else if(!tv_new_pwd.getText().toString().equals(tv_new_pwd_check.getText().toString())) {
-            Toast.makeText(ChangePasswordActivity.this,"신규 비밀번호와 신규 비밀번호 확인이 일치하지 않습니다.",Toast.LENGTH_SHORT).show();
+        if (tv_pwd.length() == 0) {
+            Toast.makeText(ChangePasswordActivity.this, "기존 비밀번호를 입력해주세요..", Toast.LENGTH_SHORT).show();
+        } else if (tv_new_pwd.length() == 0) {
+            Toast.makeText(ChangePasswordActivity.this, "신규 비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
+        } else if (tv_new_pwd_check.length() == 0) {
+            Toast.makeText(ChangePasswordActivity.this, "신규 비밀번호 확인 입력해주세요.", Toast.LENGTH_SHORT).show();
+        } else if (!tv_pwd.getText().toString().equals(password)) {
+            Toast.makeText(ChangePasswordActivity.this, "기존 비밀번호를 확인해주세요.", Toast.LENGTH_SHORT).show();
+        } else if (!tv_new_pwd.getText().toString().equals(tv_new_pwd_check.getText().toString())) {
+            Toast.makeText(ChangePasswordActivity.this, "신규 비밀번호와 신규 비밀번호 확인이 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
         } else {
             connectInsertData();
         }
@@ -70,18 +76,16 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
     }
 
-    private void connectInsertData(){
+    private void connectInsertData() {
         urlAddr = "http://" + centIP + ":8080/gambas/SKHmyInfoPwChange.jsp";
         urlAddr += "?uSeqno=" + HomeData.USERID + "&uPassword=" + tv_new_pwd.getText().toString();
         Log.v("TAG", urlAddr);
         try {
             UserUpdateTask task = new UserUpdateTask(ChangePasswordActivity.this, urlAddr);
             task.execute().get();
-            Toast.makeText(ChangePasswordActivity.this,"비밀번호가 성공적으로 변경되었습니다.",Toast.LENGTH_SHORT).show();
-//            intent = new Intent(ChangePasswordActivity.this, Fragment_fourth.class);
-//            startActivity(intent);
-            finish();
-        }catch (Exception e){
+            Toast.makeText(ChangePasswordActivity.this, "비밀번호가 성공적으로 변경되었습니다.", Toast.LENGTH_SHORT).show();
+            endThisActivity();
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

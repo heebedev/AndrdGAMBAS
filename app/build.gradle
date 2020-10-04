@@ -3,7 +3,7 @@ apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 30
-    buildToolsVersion "30.0.0"
+    buildToolsVersion "30.0.2"
 
     defaultConfig {
         applicationId "com.pjt.andrdgambas"
@@ -25,6 +25,10 @@ android {
 }
 
 dependencies {
+
+    // firebase
+    implementation 'com.google.firebase:firebase-analytics:17.5.0'
+
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
@@ -57,5 +61,7 @@ dependencies {
 // glide 추가 : 송희
     implementation 'com.github.bumptech.glide:glide:4.10.0'
 
+    // 이미지 동그랗게 만들기
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
 
 }

@@ -61,12 +61,12 @@ public class MyInfo2NetworkTask extends AsyncTask<Integer, String, Object> {
         InputStreamReader inputStreamReader = null;
         BufferedReader bufferedReader = null;
 
-        try{
+        try {
             URL url = new URL(mAddr);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setConnectTimeout(10000);
 
-            if(httpURLConnection.getResponseCode() == HttpURLConnection.HTTP_OK){
+            if (httpURLConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 inputStream = httpURLConnection.getInputStream();
                 inputStreamReader = new InputStreamReader(inputStream);
                 bufferedReader = new BufferedReader(inputStreamReader);
@@ -75,7 +75,7 @@ public class MyInfo2NetworkTask extends AsyncTask<Integer, String, Object> {
                 while (true) {
                     i++;
                     String strline = bufferedReader.readLine();
-                    if(strline == null) break;
+                    if (strline == null) break;
                     stringBuffer.append(strline + "\n");
                 }
 
@@ -86,12 +86,12 @@ public class MyInfo2NetworkTask extends AsyncTask<Integer, String, Object> {
 
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
-            try{
-                if(bufferedReader != null) bufferedReader.close();
-                if(inputStreamReader != null) inputStreamReader.close();
-                if(inputStream != null) inputStream.close();
-            }catch (Exception e) {
+        } finally {
+            try {
+                if (bufferedReader != null) bufferedReader.close();
+                if (inputStreamReader != null) inputStreamReader.close();
+                if (inputStream != null) inputStream.close();
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -101,17 +101,13 @@ public class MyInfo2NetworkTask extends AsyncTask<Integer, String, Object> {
 
 
     private void Parser(String s) {
-        try{
+        try {
             JSONObject jsonObject = new JSONObject(s);
             name = jsonObject.getString("name");
             image = jsonObject.getString("image");
 
-            Log.v("MyInfoTask", name);
-            Log.v("MyInfoTask", image);
-
             myinfo.add(name);
             myinfo.add(image);
-            Log.v("MyInfoTask", String.valueOf(myinfo));
 
         } catch (Exception e) {
 
