@@ -155,6 +155,8 @@ public class LoginActivity extends AppCompatActivity {
 
             }else if(returnpwd.equals(pw)){ // 디비에서 가져온 비밀번호랑 입력한 비밀번호가 동일하면 로그인성공
                 // 로그인 성공
+                et_email.setText("");
+                et_pw.setText("");
                 intent = new Intent(LoginActivity.this, MainActivity.class);
                 intent.putExtra("uSeqno", HomeData.USERID);
                 startActivity(intent);

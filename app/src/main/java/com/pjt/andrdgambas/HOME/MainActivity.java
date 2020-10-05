@@ -8,6 +8,11 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -18,6 +23,9 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
+import com.pjt.andrdgambas.LOGIN.LoginActivity;
+import com.pjt.andrdgambas.MYCHANNEL.Activity_Mychannel;
+import com.pjt.andrdgambas.MYCHANNEL.MyChannel;
 import com.pjt.andrdgambas.MYINFO.Fragment_myinfo;
 import com.pjt.andrdgambas.SUBSCRIBE.Fragment_Subscribe;
 import com.pjt.andrdgambas.Adapter_ViewPager;
@@ -37,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     NavigationView nav_view;
     View header;
     Adapter_ViewPager adapter;
+    Intent intent;
 
     private BackPressedForFinish backPressedForFinish;
 
@@ -110,9 +119,27 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.nav_item_myChannel:
+                        intent = new Intent(MainActivity.this, Activity_Mychannel.class);
+                        startActivity(intent);
                         Log.v(logTitle,"goMyChannel()");
                         break;
                     case R.id.nav_item_logout:
+                        new AlertDialog.Builder(MainActivity.this)
+                                .setTitle("로그아웃").setMessage("로그아웃 하시겠습니까?")
+                                .setPositiveButton("로그아웃", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int whichButton) {
+                                        Intent i = new Intent(MainActivity.this/*현재 액티비티 위치*/ , LoginActivity.class/*이동 액티비티 위치*/);
+                                        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                        startActivity(i);
+                                    }
+                                })
+                                .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int whichButton) {
+
+                                    }
+                                })
+                                .show();
+
                         Log.v(logTitle,"doLogOut()");
                         break;
                 }

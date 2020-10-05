@@ -40,7 +40,7 @@ public class ContentListActivity extends AppCompatActivity {
     ListView lv_content_list;
     ArrayList<Content> content;
     ContentAdapter contentAdapter;
-    String prdSeqno = "1"; // *** 테스트
+    String prdSeqno = STATICDATA.PRD_SEQNO; // *** 테스트
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +57,6 @@ public class ContentListActivity extends AppCompatActivity {
         btn_add_content.setOnClickListener(onClickListener);
         lv_content_list = findViewById(R.id.lv_content_list);
 
-        // *** 숙전이언니 prd랑 연결 해야 됨
-//        intent = getIntent();
-//        prdSeqno = intent.getStringExtra("prdSeqno");
 
         urlAddr = "http://" + centIP + ":8080/gambas/getPrdInfo_android.jsp";
         connectGetData();

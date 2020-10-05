@@ -10,7 +10,7 @@ import java.net.URL;
 public class SJ_InsNetworkTask extends AsyncTask<Integer, String, Void> {
     Context context;
     String mAddr;
-    ProgressDialog progressDialog; // 가시적으로도 좋고, 에러 확인 겸 ㅎ
+    ProgressDialog progressDialog;
 
     // 생성자 만들어지... 2개만 쓴다고 했으니깐.
     // 생성자.

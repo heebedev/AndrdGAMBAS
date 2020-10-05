@@ -41,7 +41,6 @@ public class Fragment_home extends Fragment {
     String urlAddr;
     String centIP = HomeData.CENIP;
     String updateUrlAddr;
-    Button btn_logout;
     Intent intent;
     HomeAdapter adapter;
     String [] categoryList;
@@ -192,10 +191,6 @@ public class Fragment_home extends Fragment {
         }
 
         adapter = new HomeAdapter(getActivity(), list);
-
-
-        Log.v("SSB", STATICDATA.UCreaterSubs);
-
 
         return view;
     }

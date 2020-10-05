@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/Ll_prdList"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/iv_mych_prdimg"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/logo"/>
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/tv_mych_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="게시물제목"
+            android:textSize="15dp"/>
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/tv_mych_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10000"
+            android:textSize="15dp"/>
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tv_mych_term"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="매일"/>
+            <TextView
+                android:id="@+id/tv_mych_day"
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="요일"/>
+        </LinearLayout>
+        
+    </LinearLayout>
+    
+</LinearLayout>
