@@ -2,7 +2,7 @@ package com.pjt.andrdgambas.HOME;
 
 public class HomeData {
     public static String USERID=null;
-    public static final String CENIP="172.20.10.6";
+    public static final String CENIP="192.168.2.8";
     //protected static final String CENIP="192.168.35.203";
     //public static final String CENIP="192.168.0.4"; // 수빈
 //    public static final String CENIP="192.168.200.104"; //승희

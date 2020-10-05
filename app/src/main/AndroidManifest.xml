@@ -23,7 +23,14 @@
         <activity android:name=".FIREBASE.TestContentsActivity" />
         <activity android:name=".FIREBASE.AddContentsActivity" />
 
-        <activity android:name=".MYCHANNEL.Activity_Mychannel"></activity>
+
+        <activity android:name=".MYCHANNEL.Activity_Mychannel">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".LOGIN.FindIdPwActivity"></activity>
         <activity android:name=".LOGIN.SignUpActivity" />
 
@@ -31,17 +38,15 @@
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
         <activity android:name=".LOGIN.EmailLoginActivity" />
+        <activity android:name=".MYCHANNEL.addProductActivity"/>
         <activity android:name=".LOGIN.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity android:name=".SUBSCRIBE.Activity_Subscribe_ContentsList"></activity>
         <activity android:name=".SUBSCRIBE.Activity_Subscribe_Contents_Detail"></activity>
         <activity android:name=".HOME.MainActivity">
+
         </activity>
     </application>
 
