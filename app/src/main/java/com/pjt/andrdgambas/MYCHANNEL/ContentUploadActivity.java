@@ -75,14 +75,12 @@ public class ContentUploadActivity extends AppCompatActivity {
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.btn_content_upload:
-                    uploadFile();
-                    UserUpdateConnect();
+                    checkEmptyText();
                     break;
                 case R.id.btn_file_upload:
                     new AlertDialog.Builder(ContentUploadActivity.this)
                             .setTitle("파일 업로드")
                             .setCancelable(false)
-                            // 하나씩 클릭해야하니깐 OnClickListener 가 여기에 들어옵니다.
                             .setItems(R.array.uploadtype, new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -130,7 +128,6 @@ public class ContentUploadActivity extends AppCompatActivity {
         if (requestCode == 0 && resultCode == RESULT_OK) {
             filePath = data.getData();
             try {
-                //Uri 파일을 Bitmap으로 만들어서 ImageView에 집어 넣는다.
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
                 tv_filename.setText(getFileName());
             } catch (IOException e) {
@@ -162,6 +159,21 @@ public class ContentUploadActivity extends AppCompatActivity {
             filename = formatter.format(now) + filePath.getLastPathSegment();
         }
         return filename;
+    }
+
+    private void checkEmptyText() {
+        if (et_content_title.length() == 0) {
+            Toast.makeText(ContentUploadActivity.this, "콘텐츠 제목을 입력해주세요.", Toast.LENGTH_SHORT).show();
+
+        } else if (et_content_context.length() == 0) {
+            Toast.makeText(ContentUploadActivity.this, "콘텐츠 내용을 입력해주세요.", Toast.LENGTH_SHORT).show();
+
+        } else if (filePath == null) {
+            Toast.makeText(ContentUploadActivity.this, "파일을 선택하세요.", Toast.LENGTH_SHORT).show();
+        } else {
+            uploadFile();
+            UserUpdateConnect();
+        }
     }
 
     //upload the file
@@ -199,13 +211,11 @@ public class ContentUploadActivity extends AppCompatActivity {
                         @Override
                         public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
                             @SuppressWarnings("VisibleForTests")
-                                    double progress = (100 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+                            double progress = (100 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
                             //dialog에 진행률을 퍼센트로 출력해 준다
                             progressDialog.setMessage("Uploaded " + ((int) progress) + "%...");
                         }
                     });
-        } else {
-            Toast.makeText(getApplicationContext(), "파일을 선택하세요.", Toast.LENGTH_SHORT).show();
         }
     }
 

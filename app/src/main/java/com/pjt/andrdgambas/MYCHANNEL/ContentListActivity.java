@@ -59,7 +59,7 @@ public class ContentListActivity extends AppCompatActivity {
 
         // *** 숙전이언니 prd랑 연결 해야 됨
 //        intent = getIntent();
-////        prdSeqno = intent.getIntExtra("prdSeqno", 0);
+//        prdSeqno = intent.getStringExtra("prdSeqno");
 
         urlAddr = "http://" + centIP + ":8080/gambas/getPrdInfo_android.jsp";
         connectGetData();
@@ -67,7 +67,6 @@ public class ContentListActivity extends AppCompatActivity {
         urlAddr2 = "http://" + centIP + ":8080/gambas/ContentList_android.jsp";
         connectContentGetData();
     }
-    // ctTitle, ctContext, ctRegistDate
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
@@ -99,7 +98,7 @@ public class ContentListActivity extends AppCompatActivity {
             tv_prd_context.setText(prdinfo[3]);
             imageName = prdinfo[4];
 
-            if(prdinfo[5].equals("0")) {
+            if (prdinfo[5].equals("0")) {
                 tv_prd_state.setText("운영종료");
             } else {
                 tv_prd_state.setText("운영중");
@@ -107,7 +106,7 @@ public class ContentListActivity extends AppCompatActivity {
 
             FirebaseStorage storage = FirebaseStorage.getInstance();
             StorageReference storageRef = storage.getReference();
-            StorageReference dateRef = storageRef.child("prdImage/"+imageName);
+            StorageReference dateRef = storageRef.child("prdImage/" + imageName);
             dateRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
