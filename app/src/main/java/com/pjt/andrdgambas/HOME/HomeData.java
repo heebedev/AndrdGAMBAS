@@ -4,7 +4,7 @@ public class HomeData {
     public static String USERID=null;
     //public static final String CENIP="172.20.10.6"; // 숙전
     //protected static final String CENIP="192.168.35.203";
-    //public static final String CENIP="192.168.0.4"; // 수빈
+    //public static final String CENIP="192.168.2.43"; // 수빈
     public static final String CENIP="192.168.200.104"; //승희
     String prdSeq;
     String title;
