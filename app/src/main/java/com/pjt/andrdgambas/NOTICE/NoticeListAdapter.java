@@ -1,6 +1,7 @@
 package com.pjt.andrdgambas.NOTICE;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,23 +40,9 @@ public class NoticeListAdapter extends RecyclerView.Adapter<NoticeListAdapter.mV
         String uDBName = data.get(position).getnName();
         String uDetailName = data.get(position).getnDetailName();
         String uCode= data.get(position).getnCode();
-
+        Log.e("Notice",uDBName);
+        Log.e("Notice",uName);
         if(uDBName.equals(uName)) {
-            switch(uCode) {
-                case "like":
-                    holder.noticeImage.setImageResource(R.drawable.speaking_blue);
-                    holder.noticeText.setText(uName + " 님이 " + uDetailName + "을 좋아합니다!");
-                    break;
-                case "subs":
-                    holder.noticeImage.setImageResource(R.drawable.speaking_green);
-                    holder.noticeText.setText(uName + " 님이 " + uDetailName + "을 구독하셨어요!");
-                    break;
-                case "review":
-                    holder.noticeImage.setImageResource(R.drawable.speaking_pink);
-                    holder.noticeText.setText(uName + " 님이 " + uDetailName + "에 후기를 남겼어요!");
-                    break;
-            }
-        } else {
             switch(uCode) {
                 case "like":
                     holder.noticeImage.setImageResource(R.drawable.speaking_blue);
@@ -68,6 +55,21 @@ public class NoticeListAdapter extends RecyclerView.Adapter<NoticeListAdapter.mV
                 case "review":
                     holder.noticeImage.setImageResource(R.drawable.speaking_pink);
                     holder.noticeText.setText(uDetailName + "에 후기를 남겼어요!");
+                    break;
+            }
+        } else {
+            switch(uCode) {
+                case "like":
+                    holder.noticeImage.setImageResource(R.drawable.speaking_blue);
+                    holder.noticeText.setText(uName + " 님이 " + uDetailName + "을 좋아합니다!");
+                    break;
+                case "subs":
+                    holder.noticeImage.setImageResource(R.drawable.speaking_green);
+                    holder.noticeText.setText(uName + " 님이 " + uDetailName + "을 구독하셨어요!");
+                    break;
+                case "review":
+                    holder.noticeImage.setImageResource(R.drawable.speaking_pink);
+                    holder.noticeText.setText(uName + " 님이 " + uDetailName + "에 후기를 남겼어요!");
                     break;
             }
         }

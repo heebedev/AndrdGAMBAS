@@ -142,7 +142,6 @@ public class PrdDetailActivity extends AppCompatActivity {
         String suffix = "?alt=media";
         Glide.with(this)
                 .load(imgURL+imgloc+"%2F"+imgName+suffix)
-                .circleCrop()
                 .placeholder(R.drawable.gambaslogo)
                 .into(imageView);
     }
