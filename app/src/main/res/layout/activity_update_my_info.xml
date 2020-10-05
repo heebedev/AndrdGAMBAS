@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="30dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    tools:context=".MYINFO.UpdateMyInfoActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="기본 정보"
+            android:textColor="#c19fc2"
+            android:textSize="16dp"
+            android:gravity="right"/>
+
+        <Button
+            android:id="@+id/btn_myinfo_update"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="수정"
+            android:background="#05ffffff"
+            android:textSize="16dp"
+            android:textColor="#c19fc2"
+            android:layout_marginLeft="50dp"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="이름"
+        android:textColor="#000000"
+        android:textSize="16dp"
+        android:layout_marginTop="30dp"/>
+    <EditText
+        android:id="@+id/et_user_name"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:background="@drawable/customedit"
+        android:layout_marginTop="10dp"
+        android:textSize="16dp"
+        android:textColor="#000000"
+        android:padding="5dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:textColor="#000000"
+        android:textSize="16dp"
+        android:layout_marginTop="30dp"/>
+
+    <EditText
+        android:id="@+id/et_user_email"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/customedit"
+        android:padding="5dp"
+        android:textColor="#000000"
+        android:textSize="16dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="휴대폰 번호"
+        android:textColor="#000000"
+        android:textSize="16dp"
+        android:layout_marginTop="30dp"/>
+
+    <EditText
+        android:id="@+id/et_user_phone"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/customedit"
+        android:padding="5dp"
+        android:textColor="#000000"
+        android:textSize="16dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="관심 항목"
+        android:textColor="#000000"
+        android:textSize="16dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="글"
+            android:textSize="16dp"
+            android:textColor="#000000"/>
+
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/cb_category_1"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="그림"
+            android:textSize="16dp"
+            android:textColor="#000000"/>
+
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/cb_category_2"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="영상"
+            android:textSize="16dp"
+            android:textColor="#000000"/>
+
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/cb_category_3"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="음악"
+            android:textSize="16dp"
+            android:textColor="#000000"/>
+
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/cb_category_4"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="기타"
+            android:textSize="16dp"
+            android:textColor="#000000"/>
+
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/cb_category_5"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"/>
+
+
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_update_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#05ffffff"
+        android:text="비밀번호 변경하기"
+        android:textColor="#000000"
+        android:textSize="16dp"
+        android:layout_marginTop="30dp"/>
+
+    <Button
+        android:id="@+id/btn_user_withdraw"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#05ffffff"
+        android:text="회원탈퇴"
+        android:textColor="#ff0000"
+        android:textSize="16dp"
+        android:layout_marginTop="20dp"/>
+
+</LinearLayout>

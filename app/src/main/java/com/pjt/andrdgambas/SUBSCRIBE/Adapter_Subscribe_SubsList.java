@@ -1,6 +1,7 @@
 package com.pjt.andrdgambas.SUBSCRIBE;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.pjt.andrdgambas.R;
 import com.pjt.andrdgambas.STATICDATA;
 
@@ -43,11 +48,34 @@ public class Adapter_Subscribe_SubsList extends RecyclerView.Adapter<Adapter_Sub
     public void onBindViewHolder(@NonNull final Adapter_Subscribe_SubsList.CustomViewHolder holder, final int position) {
 
         //Glide gradle 추가 : 이미지뷰 url(String)로 가져오기
-        Glide.with(holder.itemView.getContext())
-                .load("http://"+STATICDATA.CENTIP+":8080/ftp/" + subslist.get(position).getPrdImage()) // 이미지 url 바꿔야함
-                .placeholder(R.drawable.ic_launcher_foreground) // 이미지 없을때 대체  // 교체 해야함
-                .error(R.drawable.ic_launcher_foreground) // 이미지 없을때 대체
-                .into(holder.iv_prdImage);
+//        Glide.with(holder.itemView.getContext())
+//                .load("http://"+STATICDATA.CENTIP+":8080/ftp/" + subslist.get(position).getPrdImage()) // 이미지 url 바꿔야함
+//                .placeholder(R.drawable.ic_launcher_foreground) // 이미지 없을때 대체  // 교체 해야함
+//                .error(R.drawable.ic_launcher_foreground) // 이미지 없을때 대체
+//                .into(holder.iv_prdImage);
+
+        String fileName = subslist.get(position).getPrdImage();
+
+        // Firebase Image
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference();
+        StorageReference dateRef = storageRef.child("prdImage/"+fileName);
+        dateRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Log.v("Firebase URL", uri.toString());
+                Glide.with(holder.itemView.getContext())
+                        .load(uri.toString())
+                        .centerCrop()
+                        .placeholder(R.drawable.ic_launcher_foreground) // 이미지 없을때 대체  // 교체 해야함
+                        .error(R.drawable.ic_launcher_foreground) // 이미지 없을때 대체
+                        .into(holder.iv_prdImage);
+            }
+        });
+
+
+
+
 
         holder.tv_prdTitle.setText(subslist.get(position).getPrdTitle());
         holder.tv_chNickname.setText(subslist.get(position).getChNickname());
