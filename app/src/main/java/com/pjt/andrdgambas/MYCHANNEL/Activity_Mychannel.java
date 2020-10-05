@@ -14,4 +14,8 @@ public class Activity_Mychannel extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mychannel);
     }
-}
+
+
+
+
+}//----
