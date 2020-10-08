@@ -181,41 +181,43 @@ public class ContentUploadActivity extends AppCompatActivity {
         //업로드할 파일이 있으면 수행
         if (filePath != null) {
             //업로드 진행 Dialog 보이기
-            final ProgressDialog progressDialog = new ProgressDialog(this);
-            progressDialog.setTitle("업로드중...");
-            progressDialog.show();
+//            final ProgressDialog progressDialog = new ProgressDialog(this);
+//            progressDialog.setTitle("업로드중...");
+//            progressDialog.show();
 
             //storage
             FirebaseStorage storage = FirebaseStorage.getInstance();
 
-            StorageReference storageRef = storage.getReferenceFromUrl("gs://gambas-174df.appspot.com").child("contentsFolder/" + filename);
-            storageRef.putFile(filePath)
-                    //성공시
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            progressDialog.dismiss(); //업로드 진행 Dialog 상자 닫기
-                            Log.v(TAG, "업로드 완료");
-                        }
-                    })
-                    //실패시
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            progressDialog.dismiss();
-                            Log.v(TAG, "업로드 실패");
-                        }
-                    })
-                    //진행중
-                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            @SuppressWarnings("VisibleForTests")
-                            double progress = (100 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
-                            //dialog에 진행률을 퍼센트로 출력해 준다
-                            progressDialog.setMessage("Uploaded " + ((int) progress) + "%...");
-                        }
-                    });
+            StorageReference storageRef = storage.getReference();
+            StorageReference storagePathRef = storageRef.child("contentsFolder/" + filename);
+            //StorageReference storageRef = storage.getReferenceFromUrl("gs://gambas-174df.appspot.com").child("contentsFolder/" + filename);
+            storagePathRef.putFile(filePath);
+//                    //성공시
+//                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//                        @Override
+//                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                            progressDialog.dismiss(); //업로드 진행 Dialog 상자 닫기
+//                            Log.v(TAG, "업로드 완료");
+//                        }
+//                    })
+//                    //실패시
+//                    .addOnFailureListener(new OnFailureListener() {
+//                        @Override
+//                        public void onFailure(@NonNull Exception e) {
+//                            progressDialog.dismiss();
+//                            Log.v(TAG, "업로드 실패");
+//                        }
+//                    })
+//                    //진행중
+//                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+//                        @Override
+//                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+//                            @SuppressWarnings("VisibleForTests")
+//                            double progress = (100 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+//                            //dialog에 진행률을 퍼센트로 출력해 준다
+//                            progressDialog.setMessage("Uploaded " + ((int) progress) + "%...");
+//                        }
+//                    });
         }
     }
 
@@ -230,7 +232,8 @@ public class ContentUploadActivity extends AppCompatActivity {
             UserUpdateTask networkTask = new UserUpdateTask(ContentUploadActivity.this, urlAddr);
             networkTask.execute().get();
             Toast.makeText(ContentUploadActivity.this, "콘텐츠가 등록되었습니다.", Toast.LENGTH_SHORT).show();
-            finish();
+            onBackPressed();
+            //finish();
 
         } catch (Exception e) {
 
