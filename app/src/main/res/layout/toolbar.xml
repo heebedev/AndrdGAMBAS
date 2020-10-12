@@ -14,6 +14,6 @@
         android:layout_margin="17.5dp"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:background="@android:drawable/menu_full_frame"/>
+        android:background="@drawable/ic_baseline_menu_24"/>
 
 </androidx.appcompat.widget.Toolbar>

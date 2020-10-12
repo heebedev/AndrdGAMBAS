@@ -3,10 +3,14 @@ package com.pjt.andrdgambas;
 public class STATICDATA {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     public static String CENTIP = "172.30.1.2"; //"192.168.2.10"; // IP "121.136.117.110" 으로 변경해야함
     //public static String USEQNO; //= "1"; // uSeqno
 =======
     public static String CENTIP = "192.168.2.12";//"172.30.1.2"; //"192.168.2.10"; // IP "121.136.117.110" 으로 변경해야함
+=======
+    public static String CENTIP = "172.30.1.36";//"172.30.1.2"; //"192.168.2.10"; // IP "121.136.117.110" 으로 변경해야함
+>>>>>>> edb9503b289dd9c20b5ce87a507a5f11f07e901a
     //public static String CENTIP = "192.168.0.4"; // 수빈
     //public static String CENTIP = "192.168.200.104";//"172.30.1.2"; //"192.168.2.10"; // IP "121.136.117.110" 으로 변경해야함
     //public static String CENTIP = "192.168.2.43"; // 수빈

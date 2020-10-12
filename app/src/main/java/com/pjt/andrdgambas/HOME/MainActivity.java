@@ -11,6 +11,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ClipData;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ import com.pjt.andrdgambas.LOGIN.LoginActivity;
 import com.pjt.andrdgambas.MYCHANNEL.Activity_Mychannel;
 import com.pjt.andrdgambas.MYCHANNEL.MyChannel;
 import com.pjt.andrdgambas.MYINFO.Fragment_myinfo;
+import com.pjt.andrdgambas.STATICDATA;
 import com.pjt.andrdgambas.SUBSCRIBE.Fragment_Subscribe;
 import com.pjt.andrdgambas.Adapter_ViewPager;
 import com.pjt.andrdgambas.NOTICE.Fragment_notice;
@@ -93,7 +95,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setNaviagionView(){
+
         nav_view.inflateMenu(R.menu.nav_item_main);
+
+//        nickName.setText(STATICDATA.UNAME);
+//        email.setText(STATICDATA.UEMAIL);
+
+        View header=nav_view.getHeaderView(0);
+        /*View view=navigationView.inflateHeaderView(R.layout.nav_header_main);*/
+        nickName = (TextView)header.findViewById(R.id.tv_navHeader_nickname);
+        email = (TextView)header.findViewById(R.id.tv_navHeader_email);
+        nickName.setText(STATICDATA.UNAME);
+        email.setText(STATICDATA.UEMAIL);
+
+        if (STATICDATA.UCreaterSubs.equals('0')) {
+            nav_draw.findViewById(R.id.nav_item_myChannel).setVisibility(View.INVISIBLE);
+        }
     }
 
     public void setTabLayout() {

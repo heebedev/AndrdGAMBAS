@@ -102,7 +102,6 @@ public class LoginNetworkTask extends AsyncTask<Integer, String , Object> {
             STATICDATA.UNAME = jsonObject.getString("uName");
             STATICDATA.UEMAIL = jsonObject.getString("uEmail");
             STATICDATA.UCreaterSubs = jsonObject.getString("uCreaterSubs");
-
         }catch (Exception e){
             e.printStackTrace();
         }
